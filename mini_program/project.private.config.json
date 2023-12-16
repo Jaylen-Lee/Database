@@ -9,6 +9,20 @@
       "list": [
         {
           "name": "",
+          "pathName": "pages/passenger/passenger",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/passenger/passenger",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
           "pathName": "pages/query/query",
           "query": "",
           "launchMode": "default",

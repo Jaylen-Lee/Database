@@ -1,20 +1,18 @@
-<view class="content">
-  <input class="xm" value="{{name}}" placeholder="姓名" placeholder-style="margin-left: 10px" bindinput="inputName" />
+<!-- pages/passengerInfo/passengerInfo.wxml -->
 
-  <input class="sfzh" value="{{id}}" placeholder="证件号码" placeholder-style="margin-left: 10px" bindinput="inputId" />
-
-  <input class="jg" password="true" placeholder="输入密码" placeholder-style="margin-left: 10px" bindinput="inputPassword" value="{{password}}"/>
-
-  <input class="jg" password="true" placeholder="确认密码" placeholder-style="margin-left: 10px" bindinput="inputPasswordConfirm" value="{{password_confirm}}"/> 
-
-  <input class="lxdh" value="{{telphone}}" placeholder="手机号码" placeholder-style="margin-left: 10px" bindinput="inputTel" />
-
-  <input class="jg" value="{{hometown}}" placeholder="籍贯" placeholder-style="margin-left: 10px" bindinput="inputHome" />
-
-  <picker range="{{typeList}}" bindchange="bindPickerChange" value="{{index}}" class="lx">
-    <text hidden="{{hidden}}" class="lxText">类型</text>
-    <text hidden="{{!hidden}}">{{typeList[index]}}</text>
-  </picker>
-
-  <button class="qd" type="primary" bindtap="formSubmit">确定</button>
+<view class="passenger-list">
+  <block wx:for="{{passengers}}" wx:for-item="passenger" wx:for-index="index">
+    <view class="passenger-item">
+      <view class="first-line">
+        <text>姓名: {{passenger.name}}</text>
+        <text>电话: {{passenger.phone}}</text>
+      </view>
+      <view class="second-line">
+        <text>类型: {{passenger.identity}}</text>
+        <text>身份证号: {{passenger.id_number}}</text>
+      </view>
+      <!-- 添加其他乘客信息字段 -->
+    </view>
+  </block>
 </view>
+<button class='btn_add' bindtap="gotoAdd_passenger">添加乘客</button>

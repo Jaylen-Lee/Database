@@ -136,6 +136,20 @@ Page({
     })
   },
 
+  gotoPassenger: function(e) {
+    if (wx.getStorageSync('flag')) {
+      wx.navigateTo({
+        url: '../passenger/passenger',
+      })
+    } else {
+      wx.showModal({
+        title: '温馨提醒',
+        content: '请先登录账户',
+        showCancel: false
+      })
+    }
+  },
+
   gotoModify: function(e) {
     if (wx.getStorageSync('flag')) {
       wx.navigateTo({

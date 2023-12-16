@@ -36,8 +36,8 @@
   <view class="icon">
     <image src="../../images/icon_nav_layout.png" />
   </view>
-  <view class="itemName">
-    <view>已添加的乘客</view>
+  <view class="itemName" bindtap="gotoPassenger">
+    <view>乘客管理</view>
   </view>
   <view class="right">></view>
 </view>

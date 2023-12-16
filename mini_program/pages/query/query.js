@@ -7,9 +7,19 @@ Page({
    * 页面的初始数据
    */
   data: {
-    ticketList: [],
+    ticketList: [{start_station : '出发站',
+    arrive_station : '到达站',
+    go_time: 'hh:mm',
+    arrive_time : 'hh:mm',
+    train_number: 'E568',
+    type:'学生票',
+    price : '333',
+    ticketId : '12',
+    go_date: 'yyyy-mm-dd',
+    seat_type : '二等',
+    remain: '10'}],
     ticketId: '',
-    goData: '',
+    goDate: '',
     hidden: true
   },
 
@@ -19,11 +29,11 @@ Page({
   onLoad: function(options) {
     var self = this
     wx.request({
-      url: 'http://localhost:8080/ticket/findBy4',
+      url: 'http://localhost:8080/Train/query',
       data: {
         start_station: wx.getStorageSync('startName'),
         arrive_station: wx.getStorageSync('endName'),
-        go_date: '2019-' + wx.getStorageSync('month') + '-' + wx.getStorageSync('day'),
+        go_date: wx.getStorageSync('year') + wx.getStorageSync('month') + '-' + wx.getStorageSync('day'),
         type: (wx.getStorageSync('stu_ticket') ? '学生票' : '成人票')
       },
       success: function(res) {
@@ -34,10 +44,10 @@ Page({
           var go_time = "ticketList[" + i + "].go_time"
           var arrive_time = "ticketList[" + i + "].arrive_time"
           var train_number = "ticketList[" + i + "].train_number"
-          var seat_type = "ticketList[" + i + "].seat_type"
+          // var seat_type = "ticketList[" + i + "].seat_type"
           var type = "ticketList[" + i + "].type"
           var price = "ticketList[" + i + "].price"
-          var ticket_id = "ticketList[" + i + "].ticket_id"
+          // var ticket_id = "ticketList[" + i + "].ticket_id"
           var ticket_goDate = "ticketList[" + i + "].go_date"
           var remain = "ticketList[" + i + "].remain"
 
@@ -48,14 +58,15 @@ Page({
             [end]: res.data[i].arrive_station,
             [train_number]: res.data[i].train_number,
             [price]: res.data[i].price,
-            [seat_type]: res.data[i].seat_type,
+            // [seat_type]: res.data[i].seat_type,
             [type]: res.data[i].type,
-            [ticket_id]: res.data[i].ticket_id,
+            // [ticket_id]: res.data[i].ticket_id,
             [ticket_goDate]: res.data[i].go_date.toString(),
             [remain]: res.data[i].remain
 
           })
-
+          
+          // 跨天时，标识"+1"
           if (res.data[i].go_date.toString().replace(/-/g, '') < util.formatTime(new Date(res.data[i].arrive_time)).split(' ')[0].replace(/\//g, '')) {
             self.setData({
               hidden: false
@@ -89,7 +100,7 @@ Page({
           })
           this.setData({
             ticketId: e.currentTarget.dataset.ticketId,
-            goData: e.currentTarget.dataset.goDate,
+            goDate: e.currentTarget.dataset.goDate,
           })
 
           var self = this

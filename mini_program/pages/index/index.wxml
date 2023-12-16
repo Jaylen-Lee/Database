@@ -17,10 +17,10 @@
           <label bindtap="gotoDestination">{{endName}}</label>
         </view>
       </view>
-      <view class="query-date" bindtap="select_date">
-        <view>
-          <text class="date">出发日期： {{month}}月{{day}}日</text>
-        </view>
+      <view class="query-date">
+          <picker mode="date" value="{{date}}" start="{{current_date}}" end="{{end_date}}" bindchange="bindDateChange">
+                <button type="default"  class="weui-btn weui-btn_default">请选择出发日期： {{year}}年{{month}} 月{{day}} 日</button>
+            </picker>
       </view>
       <view class="query-row">
         <view class="train-checked">

@@ -1,59 +1,34 @@
-.content {
-  margin-top: 15%;
+/* pages/passengerInfo/passengerInfo.wxss */
+
+.passenger-list {
+  margin-top: 30rpx;
+  padding: 20rpx;
 }
 
-.xm {
-  border: 2px solid rgb(146, 141, 141);
-  border-radius: 5px;
-  margin-left: 15px;
-  margin-right: 15px;
-  height: 60rpx;
+.passenger-item {
+  background-color: rgb(223, 223, 213);
+  margin-bottom: 20rpx;
+  padding: 10rpx;
+  border: 1rpx solid rgb(88, 171, 219);
 }
 
-.sfzh {
-  border: 2px solid rgb(146, 141, 141);
-  border-radius: 5px;
-  margin-left: 15px;
-  margin-right: 15px;
-  margin-top: 15px;
-  height: 60rpx;
+.first-line {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10rpx;
+  font-size: 30rpx; /* 调整字体大小 */
 }
 
-.lxdh {
-  border: 2px solid rgb(146, 141, 141);
-  border-radius: 5px;
-  margin-left: 15px;
-  margin-right: 15px;
-  margin-top: 15px;
-  height: 60rpx;
+.second-line {
+  display: flex;
+  justify-content: space-between;
+  font-size: 30rpx; /* 调整字体大小 */
 }
 
-.jg {
-  border: 2px solid rgb(146, 141, 141);
-  border-radius: 5px;
-  margin-left: 15px;
-  margin-right: 15px;
-  margin-top: 15px;
-  height: 60rpx;
-}
-
-.lx {
-  border: 2px solid rgb(146, 141, 141);
-  border-radius: 5px;
-  margin-left: 15px;
-  margin-right: 15px;
-  margin-top: 15px;
-  height: 60rpx;
-  padding-left: 10px;
-}
-
-.qd {
-  margin-left: 15rpx;
-  margin-right: 15rpx;
-  margin-top: 100rpx;
-  border-radius: 40rpx;
-}
-
-.lxText{
-    color: #808080;
+.btn_add {
+  background-color: #29ce5b;
+  width: 80%;
+  padding: 0;
+  border-radius: 30px;
+  color: white;
 }

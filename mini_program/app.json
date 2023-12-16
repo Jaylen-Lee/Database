@@ -10,7 +10,9 @@
     "pages/query/query",
     "pages/userInfo/userInfo",
     "pages/register/register",
-    "pages/modify/modify"
+    "pages/modify/modify",
+    "pages/passenger/passenger",
+    "pages/add_passenger/add_passenger"
   ],
   "window": {
     "backgroundTextStyle": "light",

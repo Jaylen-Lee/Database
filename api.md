@@ -29,11 +29,35 @@
 - **返回值**
   - 无
 
-
-
+### 2.查询用户已添加的乘客
+- **URL**
+  - `./Passenger/findbyuser`
+- **方法**
+  - `POST`
+- **参数**
+  - `account`（用户账号）
+- **后端操作** 
+  - 返回该用户已添加的所有乘客
+- **返回值[{item}]**  
+  - `name`
+  - `id_number`
+  - `phone`
+  - `identity`
 
 ### 3.添加乘客
-
+- **URL**
+  - `./Passenger/add`
+- **方法**
+  - `POST`
+- **参数**
+  - `id_number`（乘客身份证号）
+  - `name`（乘客姓名）
+  - `telphone`（乘客电话号）
+  - `indentity`（乘客类型）
+- **后端操作** 
+  - 将新的乘客信息添加到个人信息表中，并同步到乘客表
+- **返回值**  
+  - 无
 
 ### 4.查询所有用户账号
 - **URL**
@@ -57,7 +81,7 @@
   - `account`（用户账号）
 - **后端操作** 
   - 根据参数is_ad，决定在管理员表/用户表中按照account查找对应的信息
-- **返回值[{item}]**  
+- **返回值{item}**  
   - `account`:
   - `username`:
   - `name`: 若为用户，返回空字符串
@@ -68,7 +92,7 @@
 ### . 查询车次信息
 
 - **URL**
-  - `/query_train`
+  - `./Train/query`
 - **方法**
   - `GET`
 - **参数**
@@ -85,6 +109,6 @@
   - `arrive_time`（到达时间）: hh:mm
   - `train_number`（列车号）
   - `type`（票类型）：成人票/学生票
-  - `price`（票价）
+  - `price`（票价）: 若为学生票，应乘0.75 
   - `go_date`（出发日期）：yyyy-mm-dd
   - `remain`（剩余票数）

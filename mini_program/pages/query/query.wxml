@@ -1,4 +1,4 @@
-<view>
+<view class="page">
   <block wx:for="{{ticketList}}">
     <view class="item" bindtap="buyTicket" data-ticket-id="{{item.ticket_id}}" data-go-date="{{item.go_date}}" data-go-time="{{item.go_time}}" data-remain="{{item.remain}}">
       <view class="row1">
@@ -16,11 +16,10 @@
 
       <view class="row2">
         <view>{{item.type}}</view>
-        <view>{{item.seat_type}}</view>
+        <!--<view>{{item.seat_type}}</view>-->
         <view>￥{{item.price}}</view>
         <view>余量:{{item.remain}}张</view>
       </view>
     </view>
-
   </block>
 </view>
