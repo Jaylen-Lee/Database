@@ -5,15 +5,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-    name: '',
-    id: '',
-    password: '',
-    password_confirm: '',
-    telphone: '',
-    hometown: '',
-    type: '',
-    typeList: ['成人', '学生'],
-    index: '',
+    account: '',  //用户账号
+    password: '',   //密码
+    password_confirm: '',   //确认密码
+    user_name:'',   //用户名
     hidden: false
   },
 
@@ -25,7 +20,9 @@ Page({
   },
 
   formSubmit: function(e) {
-    if (this.data.id && this.data.name && this.data.telphone && this.data.hometown && this.data.type && this.data.password && this.data.password_confirm) {
+    //console.log(this.data)
+    // console.log(wx.getStorageSync('day'))
+    if (this.data.account && this.data.user_name && this.data.password && this.data.password_confirm) {
       if (this.data.password != this.data.password_confirm) {
         wx.showModal({
           title: '温馨提醒',
@@ -35,34 +32,32 @@ Page({
       } else {
         var self = this
         wx.request({
-          url: 'http://localhost:8080/client/save',
+          url: 'http://localhost:8080/User/register',
           data: {
-            id: self.data.id,
-            name: self.data.name,
-            telphone: self.data.telphone,
-            hometown: self.data.hometown,
-            type: self.data.type,
+            account: self.data.account,
+            username: self.data.user_name,
             password: self.data.password
           },
           success: function(res) {
             self.setData({
-              name: '',
-              id: '',
-              telphone: '',
-              hometown: '',
-              type: '',
+              user_name: '',
+              account: '',
               password:'',
               password_confirm:'',
               hidden:false
             })
+            wx.showToast({
+              title: '注册成功',
+              icon: 'success',
+              duration: 2000
+            })
           }
-
         })
-        wx.showToast({
+        /*wx.showToast({
           title: '注册成功',
           icon: 'success',
           duration: 2000
-        })
+        })*/
       }
     } else {
       wx.showModal({
@@ -73,37 +68,19 @@ Page({
     }
   },
 
-  inputName: function(e) {
+  inputAccount: function(e) {
     this.setData({
-      name: e.detail.value
+      account : e.detail.value
     })
   },
 
-  inputId: function(e) {
+  inputUser_name: function(e) {
     this.setData({
-      id: e.detail.value
+      user_name: e.detail.value
     })
   },
 
-  inputTel: function(e) {
-    this.setData({
-      telphone: e.detail.value
-    })
-  },
-
-  inputHome: function(e) {
-    this.setData({
-      hometown: e.detail.value
-    })
-  },
-
-  bindPickerChange: function(e) {
-    this.setData({
-      type: this.data.typeList[e.detail.value],
-      index: e.detail.value,
-      hidden: true
-    })
-  },
+  
 
   inputPassword: function(e) {
     this.setData({

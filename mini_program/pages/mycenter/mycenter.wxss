@@ -157,7 +157,7 @@
   padding-left: 2vh;
   padding-right: 2vh;
   padding-top: 2vh;
-  padding-bottom: 2vh;
+  padding-bottom: 0.1vh;
 }
 
 .toast-button {
@@ -197,4 +197,17 @@
   background: black;
   width: 100%;
   height: 5rpx;
+}
+.is_ad {
+  padding: 15rpx 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.is_ad-checked text {
+  margin-left: 170rpx;
+
+  font-weight: 600;
 }

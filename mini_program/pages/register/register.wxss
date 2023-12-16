@@ -2,7 +2,7 @@
   margin-top: 15%;
 }
 
-.xm {
+.account {
   border: 2px solid rgb(146, 141, 141);
   border-radius: 5px;
   margin-left: 15px;
@@ -10,7 +10,7 @@
   height: 60rpx;
 }
 
-.sfzh {
+.user_name {
   border: 2px solid rgb(146, 141, 141);
   border-radius: 5px;
   margin-left: 15px;
@@ -19,14 +19,6 @@
   height: 60rpx;
 }
 
-.lxdh {
-  border: 2px solid rgb(146, 141, 141);
-  border-radius: 5px;
-  margin-left: 15px;
-  margin-right: 15px;
-  margin-top: 15px;
-  height: 60rpx;
-}
 
 .jg {
   border: 2px solid rgb(146, 141, 141);
@@ -35,16 +27,6 @@
   margin-right: 15px;
   margin-top: 15px;
   height: 60rpx;
-}
-
-.lx {
-  border: 2px solid rgb(146, 141, 141);
-  border-radius: 5px;
-  margin-left: 15px;
-  margin-right: 15px;
-  margin-top: 15px;
-  height: 60rpx;
-  padding-left: 10px;
 }
 
 .qd {

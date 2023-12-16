@@ -54,6 +54,13 @@
           <input placeholder='请输入账号' value="{{clientID}}" bindblur="idInput"></input>
           <view class="divLine"></view>
           <input placeholder="请输入密码" value="{{password}}" bindblur="passwordInput" password="true"></input>
+          <view class="divLine"></view>
+        <view class="is_ad">
+        <view class="is_ad-checked">
+          <text>管理员账号</text>
+          <switch checked="{{is_ad}}" bindchange="is_ad_change" data-stu_ticket="{{is_ad}}"/>
+        </view>
+      </view>
         </view>
       </view>
       <view class='toast-button'>
