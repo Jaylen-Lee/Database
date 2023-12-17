@@ -8,18 +8,18 @@
     <view class="query-box">
       <view class="query-city">
         <view class="begin-city">
-          <label bindtap="gotoStart">{{startName}}</label>
+          <label bindtap="gotoStart" style="font-size: 50rpx;">{{startName}}</label>
         </view>
         <view class="switch">
           <image class="switch-img" src="../../images/switch.png" bindtap="switch"></image>
         </view>
         <view class="end-city">
-          <label bindtap="gotoDestination">{{endName}}</label>
+          <label bindtap="gotoDestination" style="font-size: 50rpx;">{{endName}}</label>
         </view>
       </view>
       <view class="query-date">
           <picker mode="date" value="{{date}}" start="{{current_date}}" end="{{end_date}}" bindchange="bindDateChange">
-                <button type="default"  class="weui-btn weui-btn_default">请选择出发日期： {{year}}年{{month}} 月{{day}} 日</button>
+                <button type="default">请选择出发日期： {{year}}年{{month}} 月{{day}} 日</button>
             </picker>
       </view>
       <view class="query-row">
