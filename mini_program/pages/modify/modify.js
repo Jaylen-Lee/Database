@@ -28,7 +28,7 @@ Page({
   onLoad: function(options) {
     var self = this
     wx.request({
-      url: 'http://localhost:8080/client/findById',
+      url: 'http://localhost:8080/User/findby_account',
       data: {
         id: wx.getStorageSync('user').id
       },

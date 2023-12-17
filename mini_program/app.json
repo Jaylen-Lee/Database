@@ -6,7 +6,6 @@
     "pages/orders/orders",
     "pages/destination/destination",
     "pages/start/start",
-    "pages/date/date",
     "pages/query/query",
     "pages/userInfo/userInfo",
     "pages/register/register",

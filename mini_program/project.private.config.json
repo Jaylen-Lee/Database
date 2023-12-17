@@ -10,6 +10,13 @@
       "list": [
         {
           "name": "",
+          "pathName": "pages/modify/modify",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
           "pathName": "pages/start/start",
           "query": "",
           "launchMode": "default",
