@@ -110,7 +110,13 @@ def find_all_accounts():
             # Combine user and administrator accounts
             all_accounts = [account['account'] for account in user_accounts] + [admin['account'] for admin in admin_accounts]
 
-        return jsonify({'accounts': all_accounts})
+            # file_path = "output.txt"
+            # with open(file_path, "w") as file:
+            #     # Write each account on a new line
+            #     for account in all_accounts:
+            #         file.write(account + "\n")
+
+        return jsonify(all_accounts)
     except Exception as e:
         return jsonify({'error': str(e)})
     finally:
@@ -182,6 +188,55 @@ def query_train():
     finally:
         connection.close()
 
+# Route for modifying user/administrator information
+@app.route('/User/modify', methods=['POST'])
+def modify_user_info():
+    is_admin = request.form.get('is_ad') == 'true'
+    account = request.form.get('account')
+    username = request.form.get('username')
+    name = request.form.get('name') if not is_admin else None
+    password = request.form.get('password')
+    phone = request.form.get('phone') if not is_admin else None
+
+    # Connect to MySQL database
+    connection = pymysql.connect(**db_config)
+
+    try:
+        with connection.cursor() as cursor:
+            if is_admin:
+                # Update administrator information in 'administrator' table
+                cursor.execute("UPDATE administrator SET username = %s, password = %s, phone = %s WHERE account = %s",
+                               (username, password, phone, account))
+            else:
+                # Update user information in 'user' table
+                cursor.execute("UPDATE user SET username = %s, password = %s WHERE account = %s",
+                               (username, password, account))
+
+            connection.commit()
+
+        return jsonify({'message': 'User/Administrator information updated successfully'})
+    except Exception as e:
+        return jsonify({'error': str(e)})
+    finally:
+        connection.close()
+
+# Route for finding all station names
+@app.route('/Station/findall', methods=['GET'])
+def find_all_stations():
+    # Connect to MySQL database
+    connection = pymysql.connect(**db_config)
+
+    try:
+        with connection.cursor() as cursor:
+            # Query all station names from the 'station' table
+            cursor.execute("SELECT station_name FROM arrival_time")
+            station_names = [result['station_name'] for result in cursor.fetchall()]
+
+        return jsonify(station_names)
+    except Exception as e:
+        return jsonify({'error': str(e)})
+    finally:
+        connection.close()
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=8080)

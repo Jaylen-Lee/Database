@@ -41,7 +41,7 @@
 <view class="H-Line"></view>
 <view class="container">
   <view class="left-ct">
-    <text class="zw">确认新密码 </text>
+    <text class="zw">确认密码 </text>
   </view>
   <view class='V-line'></view>
   <input class = 'sr' password="true" placeholder="确认新密码" bindinput="inputPasswordConfirm" value="{{password_confirm}}"/> 
