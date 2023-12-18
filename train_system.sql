@@ -11,7 +11,7 @@
  Target Server Version : 80100
  File Encoding         : 65001
 
- Date: 17/12/2023 14:08:14
+ Date: 18/12/2023 16:51:12
 */
 
 SET NAMES utf8mb4;
@@ -37,12 +37,11 @@ DROP TABLE IF EXISTS `arrival_time`;
 CREATE TABLE `arrival_time`  (
   `train_number` varchar(15) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
   `station_name` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
-  `arrival_time` datetime(0) NOT NULL,
+  `arrival_time` time(0) NOT NULL,
   `stop_order` smallint(0) NOT NULL,
-  PRIMARY KEY (`train_number`, `station_name`) USING BTREE,
+  PRIMARY KEY (`train_number`, `station_name`, `stop_order`) USING BTREE,
   INDEX `arrival_time_ibfk_2`(`station_name`) USING BTREE,
-  CONSTRAINT `arrival_time_ibfk_1` FOREIGN KEY (`train_number`) REFERENCES `train` (`train_number`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `arrival_time_ibfk_2` FOREIGN KEY (`station_name`) REFERENCES `station` (`station_name`) ON DELETE RESTRICT ON UPDATE CASCADE
+  CONSTRAINT `arrival_time_ibfk_1` FOREIGN KEY (`train_number`) REFERENCES `train` (`train_number`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -54,7 +53,7 @@ CREATE TABLE `order`  (
   `purchase_time` datetime(0) NOT NULL,
   `payment_amount` smallint(0) NOT NULL,
   `payment_method` varchar(15) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
-  `status` varchar(5) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `status` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
   `user_account` varchar(15) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
   PRIMARY KEY (`order_number`) USING BTREE,
   INDEX `user_account`(`user_account`) USING BTREE,
@@ -93,21 +92,10 @@ CREATE TABLE `person_info`  (
 DROP TABLE IF EXISTS `seats`;
 CREATE TABLE `seats`  (
   `train_number` varchar(15) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
-  `date` datetime(0) NOT NULL,
+  `date` date NOT NULL,
   `remaining_seats` smallint(0) NOT NULL,
   PRIMARY KEY (`train_number`, `date`) USING BTREE,
   CONSTRAINT `seats_ibfk_1` FOREIGN KEY (`train_number`) REFERENCES `train` (`train_number`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for station
--- ----------------------------
-DROP TABLE IF EXISTS `station`;
-CREATE TABLE `station`  (
-  `station_name` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
-  `address` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
-  `opening_time` date NULL DEFAULT NULL,
-  PRIMARY KEY (`station_name`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -117,15 +105,14 @@ DROP TABLE IF EXISTS `ticket`;
 CREATE TABLE `ticket`  (
   `ticket_number` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
   `train_number` varchar(15) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
-  `seat_number` smallint(0) NOT NULL,
   `departure_station` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
   `destination_station` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
   `fare` smallint(0) NOT NULL,
-  `date` datetime(0) NOT NULL,
+  `date` date NOT NULL,
   `id_number` char(18) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
   `order_number` char(15) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
-  `departure_time` datetime(0) NOT NULL,
-  `arrival_time` datetime(0) NOT NULL,
+  `departure_time` time(0) NOT NULL,
+  `arrival_time` time(0) NOT NULL,
   PRIMARY KEY (`ticket_number`) USING BTREE,
   INDEX `train_number`(`train_number`) USING BTREE,
   INDEX `id_number`(`id_number`) USING BTREE,
@@ -134,9 +121,7 @@ CREATE TABLE `ticket`  (
   INDEX `destination_station`(`destination_station`) USING BTREE,
   CONSTRAINT `ticket_ibfk_1` FOREIGN KEY (`train_number`) REFERENCES `train` (`train_number`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `ticket_ibfk_2` FOREIGN KEY (`id_number`) REFERENCES `passenger` (`id_number`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `ticket_ibfk_3` FOREIGN KEY (`order_number`) REFERENCES `order` (`order_number`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `ticket_ibfk_4` FOREIGN KEY (`departure_station`) REFERENCES `station` (`station_name`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `ticket_ibfk_5` FOREIGN KEY (`destination_station`) REFERENCES `station` (`station_name`) ON DELETE RESTRICT ON UPDATE CASCADE
+  CONSTRAINT `ticket_ibfk_3` FOREIGN KEY (`order_number`) REFERENCES `order` (`order_number`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -159,7 +144,7 @@ CREATE TABLE `user`  (
   `account` varchar(15) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
   `username` varchar(15) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
   `password` varchar(15) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
-  `noOfOrder` smallint(0) NOT NULL,
+  `noOfOrder` smallint(0) NULL DEFAULT 30,
   PRIMARY KEY (`account`) USING BTREE,
   INDEX `index_account`(`account`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
