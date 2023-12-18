@@ -1,6 +1,6 @@
 <view class="container">
   <view class="left-ct">
-    <text class="zw">当前的用户名是，历史订单共有{{count}}单</text>
+    <text class="zw">当前用户为</text><strong>{{account}}</strong><text class="zw">，历史订单共有{{count}}单</text>
   </view>
 </view>
 
@@ -9,18 +9,20 @@
     return str.indexOf(str_);
   }
 </wxs>
-
-<input type="text" bindinput="inputCom" placeholder="xxxx-xx-xx格式筛选" />
-
 <view class="content" hidden="{{!hidden}}">
+  <view class="container">
+  <view class="left-ct">
+<input type="text" bindinput="inputCom" placeholder="以xxxx-xx-xx格式筛选" />
+<text>点击订单了解详情</text>
+</view>
+</view>
   <block wx:for="{{ordersList}}" class="orders">
     <view wx:if="{{indexofStr.includes(item.datetime,inputdata2)>-1}}"></view>
-    <!-- <view class="item" bindtap="bindSelect" data-ticket-id="{{item.ticket_id}}" data-order-number="{{item.order_number}}"> -->
-      <view class="item" bindtap="bindSelect" data-order-number="{{item.order_number}}">
+    <view class="item" bindtap="bindSelect" data-order-number="{{item.order_number}}">
       <view>
         <view class="index">{{index+1}}</view>
         <view class="divLine"></view>
-        
+
         <view class="row">
           <text class="left">订单编号:</text>
           <text class="right">{{item.order_number}}</text>
@@ -35,13 +37,13 @@
 
         <view class="row">
           <text class="left">支付金额:</text>
-          <text class="right">{{item.payment_amount}}</text>
+          <text class="right">{{item.payment_amount}}元</text>
         </view>
         <view class="divLine"></view>
 
         <view class="row">
           <text class="left">支付方式:</text>
-          <text class="right">{{item.ticket_id}}</text>
+          <text class="right">{{item.payment_method}}</text>
         </view>
         <view class="divLine"></view>
 
@@ -50,9 +52,7 @@
           <text class="right">{{item.purchase_time}}</text>
         </view>
         <view class="divLine"></view>
-
       </view>
-    </view>
     </view>
   </block>
 </view>
