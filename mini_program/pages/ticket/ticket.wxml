@@ -3,8 +3,8 @@
 <view class="ticket">
   <view class="row1">
     <view class="c1">
-      <view>{{ticket.start_station}}</view>
-      <view>{{go_time}}</view>
+      <view>{{ticket.depareture_station}}</view>
+      <view>{{ticket.depareture_time}}</view>
     </view>
 
     <view class="c2">
@@ -13,11 +13,11 @@
     </view>
 
     <view class="c3">
-      <view>{{ticket.arrive_station}}</view>
-      <view>{{arrive_time}}</view>
+      <view>{{ticket.destination_station}}</view>
+      <view>{{ ticket.arrival_time }}</view>
     </view>
   </view>
-  <view class="row2">发车时间：{{ticket.go_date}}</view>
+  <view class="row2">发车日期：{{ticket.date}}</view>
 
 </view>
 
@@ -27,9 +27,16 @@
     <view>{{ticket.type}}</view>
   </view>
   <view class="row">
-    <view>{{ticket.seat_type}}</view>
-    <view class="price">￥{{ticket.price}}</view>
+    <!-- <view>{{ticket.seat_type}}</view> -->
+    <view class="price">票价 ￥{{ticket.fare}}</view>
+  </view>
+
+  <view class="row">
+    <!-- <view>{{ticket.seat_type}}</view> -->
+    <view class="order">所属订单状态: {{ status }} </view>
   </view>
 </view>
 
-<button class="btn" bindtap="dishonour">退票</button>
+
+
+<!-- <button class="btn" bindtap="dishonour">退票</button> -->
