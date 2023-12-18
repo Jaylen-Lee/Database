@@ -1,0 +1,18 @@
+<!-- pages/passengerInfo/passengerInfo.wxml -->
+
+<view class="passenger-list">
+  <block wx:for="{{passengers}}" wx:for-item="passenger" wx:for-index="index">
+    <view class="passenger-item">
+      <view class="first-line">
+        <text>姓名: {{passenger.name}}</text>
+        <text>电话: {{passenger.phone}}</text>
+      </view>
+      <view class="second-line">
+        <text>类型: {{passenger.identity}}</text>
+        <text>身份证号: {{passenger.id_number}}</text>
+      </view>
+      <!-- 添加其他乘客信息字段 -->
+    </view>
+  </block>
+</view>
+<button class='btn_add' bindtap="gotoAdd_passenger">添加乘客</button>

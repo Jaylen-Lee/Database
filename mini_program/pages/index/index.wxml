@@ -1,0 +1,34 @@
+<!--pages/train/train.wxml-->
+
+<view class="page-top">
+  <image src="../../images/top/index2.png"></image>
+</view>
+<view class="bg">
+  <view class="container">
+    <view class="query-box">
+      <view class="query-city">
+        <view class="begin-city">
+          <label bindtap="gotoStart" style="font-size: 50rpx;">{{startName}}</label>
+        </view>
+        <view class="switch">
+          <image class="switch-img" src="../../images/switch.png" bindtap="switch"></image>
+        </view>
+        <view class="end-city">
+          <label bindtap="gotoDestination" style="font-size: 50rpx;">{{endName}}</label>
+        </view>
+      </view>
+      <view class="query-date">
+          <picker mode="date" value="2023-06-17" start="{{current_date}}" end="{{end_date}}" bindchange="bindDateChange">
+                <button type="default">请选择出发日期： {{year}}年{{month}} 月{{day}} 日</button>
+            </picker>
+      </view>
+      <view class="query-row">
+        <view class="train-checked">
+          <text>学生票</text>
+          <switch checked="{{stu_ticket}}" bindchange="stu_ticket_choose" data-stu_ticket="{{stu_ticket}}"/>
+        </view>
+      </view>
+      <button class='btn_query' bindtap="gotoQuery">查询</button>
+    </view>
+  </view>
+</view>

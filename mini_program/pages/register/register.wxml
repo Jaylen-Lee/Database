@@ -1,0 +1,13 @@
+<view class="content">
+  <input class="account" value="{{account}}" placeholder="用户账号" placeholder-style="margin-left: 10px" bindinput="inputAccount" />
+
+  <input class="user_name" value="{{user_name}}" placeholder="用户名" placeholder-style="margin-left: 10px" bindinput="inputUser_name" />
+
+  <input class="jg" password="true" placeholder="输入密码" placeholder-style="margin-left: 10px" bindinput="inputPassword" value="{{password}}"/>
+
+  <input class="jg" password="true" placeholder="确认密码" placeholder-style="margin-left: 10px" bindinput="inputPasswordConfirm" value="{{password_confirm}}"/> 
+
+
+
+  <button class="qd" type="primary" plain="true" bindtap="formSubmit">确定</button>
+</view>
