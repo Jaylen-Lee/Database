@@ -1,0 +1,25 @@
+<view class="page">
+  <view class="content" hidden="{{!hidden}}">
+    <checkbox-group bindchange="checkboxChange">
+  <block wx:for="{{passenger_List}}">
+    <view class="item">
+      <view class="row1">
+        <view><checkbox value="{{item.id_number}}" checked="{{item.tick}}"/></view>
+        <view class="go">
+          <!-- <view><checkbox value="{{item.id_number}}" checked="{{item.tick}}"/></view> -->
+          <view> 乘客姓名:{{item.name}}</view>
+          <view>身份证号:{{item.id_number}}</view>
+          <view>电话:{{item.phone}}</view>
+          <view hidden="{{item.identity}}">票种:成人票</view>
+          <view hidden="{{!item.identity}}">票种:学生票</view>
+        </view>
+      </view>
+    </view>
+  </block>
+</checkbox-group>
+<button class="qd" type="primary" bindtap="formSubmit">确定</button>
+  </view>
+  <view hidden="{{hidden}}" >
+    <view class="text">空空如也~先去添加乘客吧</view>
+    </view>
+</view>

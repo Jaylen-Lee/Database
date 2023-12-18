@@ -79,12 +79,57 @@ Page({
   },
 
   buyTicket: function(e) {
-    wx.navigateTo({
-      url: '../choose_passenger/choose_passenger',
-    })
-    // wx.setStorageSync('ticket_id', e.currentTarget.dataset.ticketId)
-    wx.setStorageSync('go_date', e.currentTarget.dataset.goDate)
-    wx.setStorageSync('train_number', e.currentTarget.dataset.trainNumber)
+    if (wx.getStorageSync('flag')) {
+      if (wx.getStorageSync('user').type == '成人' && wx.getStorageSync('stu_ticket')) {
+        wx.showModal({
+          title: '温馨提醒',
+          content: '您非学生不能购买学生票',
+          showCancel: false
+        })
+      } else {
+        if (e.currentTarget.dataset.remain > 0) {
+          wx.showToast({
+            title: '购票成功',
+            icon: 'success',
+            duration: 2000
+          })
+          this.setData({
+            ticketId: e.currentTarget.dataset.ticketId,
+            goDate: e.currentTarget.dataset.goDate,
+          })
+
+          var self = this
+          var timestamp = Date.parse(new Date())
+          var time = util.formatTime(new Date()).toString().replace(/\//g, '-')
+          var go_off = e.currentTarget.dataset.goDate + ' ' + e.currentTarget.dataset.goTime + ':00'
+
+          wx.request({
+            url: 'http://localhost:8080/orders/save',
+            data: {
+              order_number: timestamp.toString(),
+              client_id: wx.getStorageSync('user').id,
+              go_date: go_off,
+              order_time: time,
+              ticket_id: self.data.ticketId
+            }
+          })
+        } else {
+          wx.showModal({
+            title: '温馨提醒',
+            content: '当前车票余量不足',
+            showCancel: false
+          })
+        }
+
+      }
+      this.onLoad()
+    } else {
+      wx.showModal({
+        title: '温馨提醒',
+        content: '请先登录后购票',
+        showCancel: false
+      })
+    }
   },
 
   /**

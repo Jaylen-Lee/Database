@@ -12,7 +12,8 @@
     "pages/modify_passenger/modify_passenger",
     "pages/modify_user/modify_user",
     "pages/passenger/passenger",
-    "pages/add_passenger/add_passenger"
+    "pages/add_passenger/add_passenger",
+    "pages/choose_passenger/choose_passenger"
   ],
   "window": {
     "backgroundTextStyle": "light",

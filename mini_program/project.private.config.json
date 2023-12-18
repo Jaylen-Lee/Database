@@ -10,6 +10,13 @@
       "list": [
         {
           "name": "",
+          "pathName": "pages/choose_passenger/choose_passenger",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
           "pathName": "pages/ticket/ticket",
           "query": "",
           "launchMode": "default",
