@@ -31,7 +31,7 @@ Page({
             id_number: self.data.id,
             name: self.data.name,
             phone: self.data.phone,
-            identity: self.data.type
+            identity: self.data.identity == "学生" ? true : false
           },
           success: function(res) {
             self.setData({

@@ -91,7 +91,7 @@ Page({
       userData.phone = (self.data.flag3 ? self.data.phone.trim() : wx.getStorageSync('user').phone);
     }
     userData.id_ad = self.data.is_ad ? true : false;
-    console.log(userData)
+    // console.log(userData)
     // 发送请求到服务器
     wx.request({
       url: 'http://localhost:8080/User/modify',

@@ -8,8 +8,8 @@ Page({
    */
   data: {
     passengers: [
-      { name: '张三', id_number: '111111111111111111', phone: '18632495173', identity: '成人' },
-      { name: '李四', id_number: '563215321478541206', phone: '18236542973', identity: '学生' },
+      { name: '张三', id_number: '111111111111111111', phone: '18632495173', identity: false },
+      { name: '李四', id_number: '563215321478541206', phone: '18236542973', identity: true },
       // 添加其他乘客信息
     ],
   },
@@ -17,6 +17,17 @@ Page({
       wx.navigateTo({
         url: '../add_passenger/add_passenger',
       })
+  },
+  editPassenger: function (event) {
+    var passenger = event.currentTarget.dataset.passenger;
+
+    // 将乘客信息存入缓存
+    wx.setStorageSync('current_passenger', passenger);
+
+    // 使用navigator组件跳转到修改界面
+    wx.navigateTo({
+      url: '/pages/modify_passenger/modify_passenger'
+    });
   },
   /**
    * 生命周期函数--监听页面加载

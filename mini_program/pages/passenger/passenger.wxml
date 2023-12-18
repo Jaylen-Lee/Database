@@ -2,13 +2,13 @@
 
 <view class="passenger-list">
   <block wx:for="{{passengers}}" wx:for-item="passenger" wx:for-index="index">
-    <view class="passenger-item">
+    <view class="passenger-item" bindtap="editPassenger" data-passenger="{{passenger}}">
       <view class="first-line">
         <text>姓名: {{passenger.name}}</text>
         <text>电话: {{passenger.phone}}</text>
       </view>
       <view class="second-line">
-        <text>类型: {{passenger.identity}}</text>
+        <text>类型: {{passenger.identity? "学生" : "成人"}}</text>
         <text>身份证号: {{passenger.id_number}}</text>
       </view>
       <!-- 添加其他乘客信息字段 -->
