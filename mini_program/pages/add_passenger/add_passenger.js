@@ -26,9 +26,10 @@ Page({
         var self = this
         wx.request({
           url: 'http://localhost:8080/Passenger/add',
+          method: 'POST',
           data: {
             account : wx.getStorageSync('user').account,
-            id_number: self.data.id,
+            id_number: self.data.id_number,
             name: self.data.name,
             phone: self.data.phone,
             identity: self.data.identity == "学生" ? true : false

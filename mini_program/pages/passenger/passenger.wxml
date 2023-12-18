@@ -1,7 +1,7 @@
 <!-- pages/passengerInfo/passengerInfo.wxml -->
 
 <view class="passenger-list">
-  <block wx:for="{{passengers}}" wx:for-item="passenger" wx:for-index="index">
+  <block wx:for="{{passengers}}" wx:for-item="passenger" wx:for-index="index" wx:key="index">
     <view class="passenger-item" bindtap="editPassenger" data-passenger="{{passenger}}">
       <view class="first-line">
         <text>姓名: {{passenger.name}}</text>
