@@ -5,7 +5,14 @@ Page({
    * 页面的初始数据
    */
   data: {
-    user:{}
+    user:{
+      account : "123567",
+      username : "aad",
+      name : "阿萨大大",
+      password : "78946",
+      phone : "763787268"
+    },
+    is_ad : false
   },
 
   /**
@@ -14,9 +21,10 @@ Page({
   onLoad: function (options) {
     var self=this
     wx.request({
-      url: 'http://localhost:8080/client/findById',
+      url: 'http://localhost:8080/User/findby_account',
       data:{
-        id:wx.getStorageSync('user').id
+        account :wx.getStorageSync('user').id,
+        is_ad : wx.getStorageSync('is_ad')
       },
       success:function(res){
         self.setData({
@@ -28,13 +36,13 @@ Page({
   },
 
   bindSelect:function(e){
-    //wx.clearStorageSync()
-    wx.removeStorageSync('user')
+    wx.clearStorageSync()
+    /*wx.removeStorageSync('user')
     wx.removeStorageSync('ticket_id')
     wx.removeStorageSync('order_number')
 
     wx.setStorageSync('flag', false)
-    wx.setStorageSync('match', false)
+    wx.setStorageSync('match', false)*/
 
     wx.showToast({
       title: '退出成功',
@@ -43,9 +51,8 @@ Page({
     })
     setTimeout(function(){
       wx.navigateBack({
-        
       })
-    },1000)
+    },100)
 
   },
 
