@@ -55,7 +55,7 @@
   - `id_number`（乘客身份证号）
   - `name`（乘客姓名）
   - `phone`（乘客电话号）
-  - `indentity`（乘客类型）:true = 学生
+  - `identity`（乘客类型）:true = 学生
 - **后端操作** 
   - 将新的乘客信息添加到个人信息表中，并同步到乘客表
 - **返回值**  
@@ -169,6 +169,7 @@
 - **返回值[{item}]**  
   - 无
 
+<<<<<<< HEAD
 ### 11.基于查询得到的车次信息购票
 
 - **URL**
@@ -238,3 +239,21 @@
   - 
 - **返回值[{item}]**  
   - 
+=======
+### 11.查询某一用户的所有订单信息
+- **URL**
+  - `./Orders/findbyaccount`
+- **方法**
+  - `GET`
+- **参数**
+  - `account`（用户账号）
+- **后端操作** 
+  - 查询订单表，返回该用户的所有订单信息
+- **返回值[{item}]**  
+  - `order_number`（订单号）
+  - `purchase_time`（下单时间）
+  - `payment_amount`（支付金额）
+  - `payment_method`（支付方式）
+  - `status`（订单状态）
+  - `user_account`（用户账号）
+>>>>>>> 319d6cb726618aceace4ff7dc8fa61e8db83a7c2

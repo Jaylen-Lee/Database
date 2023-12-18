@@ -10,6 +10,7 @@ Page({
   data: {
     account: "暂无",
     count: 0,
+    inputShowed: false,
     ordersList: [{
       order_number: "000020beb3b359b",
       purchase_time: "2021-09-01 02:53:03",
@@ -31,9 +32,9 @@ Page({
       account:wx.getStorageSync('user').account
     })
     wx.request({
-      url: 'http://localhost:8080/orders/findByClient_id',
+      url: 'http://localhost:8080/Orders/findbyaccount',
       data: {
-        client_id: wx.getStorageSync('user').id
+        account: wx.getStorageSync('user').id
       },
       success: function (res) {
 
@@ -73,7 +74,24 @@ Page({
     })
     console.log(this.data.inputdata);
   },
-
+  hideInput() {
+    this.setData({
+      inputVal: '',
+      inputShowed : false,
+      tempstations : this.data.stations
+    });
+  },
+  clearInput() {
+    this.setData({
+      inputVal: '',
+      tempstations : this.data.stations
+    });
+  },
+  showInput() {
+    this.setData({
+      inputShowed: true,
+    });
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

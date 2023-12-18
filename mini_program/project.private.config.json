@@ -10,7 +10,18 @@
       "list": [
         {
           "name": "",
+<<<<<<< Updated upstream
           "pathName": "pages/choose_passenger/choose_passenger",
+=======
+          "pathName": "pages/orders/orders",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/userInfo/userInfo",
+>>>>>>> Stashed changes
           "query": "",
           "launchMode": "default",
           "scene": null
