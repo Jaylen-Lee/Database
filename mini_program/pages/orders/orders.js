@@ -8,7 +8,9 @@ Page({
    * 页面的初始数据
    */
   data: {
+    count: 0,
     ordersList: [],
+    inputdata:'-',
     hidden:true
   },
 
@@ -27,8 +29,8 @@ Page({
         if (res.data.length > 0) {
           self.setData({
             ordersList: res.data,
-            hidden: true
-
+            hidden: true,
+            count: res.data.length
           })
           for (var i = 0; i < res.data.length; i++) {
             var index1 = "ordersList[" + i + "].order_time"
@@ -51,8 +53,15 @@ Page({
     wx.navigateTo({
       url: '../ticket/ticket',
     })
-    wx.setStorageSync('ticket_id', e.currentTarget.dataset.ticketId)
+    // wx.setStorageSync('ticket_id', e.currentTarget.dataset.ticketId)
     wx.setStorageSync('order_number', e.currentTarget.dataset.orderNumber)
+  },
+
+  inputCom: function (e) {
+    this.setData({
+      inputdata: e.detail.value
+    })
+    console.log(this.data.inputdata);
   },
 
   /**
