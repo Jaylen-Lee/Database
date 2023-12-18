@@ -1,4 +1,11 @@
 <view class="page">
+  <view class="payment-options">
+  <radio-group bindchange="radioChange">
+    <block wx:for="{{paymentOptions}}">
+      <radio value="{{item.name}}" checked="{{item.checked}}">{{item.value}}</radio><text>{{item.name}}</text>
+    </block>
+  </radio-group>
+</view>
   <view class="content" hidden="{{!hidden}}">
     <checkbox-group bindchange="checkboxChange">
   <block wx:for="{{passenger_List}}">

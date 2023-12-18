@@ -11,12 +11,12 @@ Page({
     account: "暂无",
     count: 0,
     ordersList: [{
-      "order_number": "000020beb3b359b",
-      "purchase_time": "2021-09-01 02:53:03",
-      "payment_amount": 7319,
-      "payment_method": "alipay",
-      "status": "completed",
-      "user_account": "805762918578633"
+      order_number: "000020beb3b359b",
+      purchase_time: "2021-09-01 02:53:03",
+      payment_amount: 7319,
+      payment_method: "alipay",
+      status: "completed",
+      user_account: "805762918578633"
     }],
     inputdata: '-',
     hidden: true

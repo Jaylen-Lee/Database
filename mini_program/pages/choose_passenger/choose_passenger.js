@@ -6,18 +6,23 @@ Page({
    */
   data: {
     passenger_List: [{
-      "name": "李金霖",
-      "id_number": "110110110110110110",
-      "phone": "17773333888",
-      "identity": 1,
-      "tick":true,
+      name: "李金霖",
+      id_number: "110110110110110110",
+      phone: "17773333888",
+      identity: 1,
+      tick:true,
     },{
-      "name": "大春",
-      "id_number": "222110110110110110",
-      "phone": "16673333888",
-      "identity": 0,
-      "tick":true,
+      name: "大春",
+      id_number: "222110110110110110",
+      phone: "16673333888",
+      identity: 0,
+      tick:true,
     }],
+    paymentOptions: [
+      { name: 'cash', checked: false },
+      { name: 'wechat', checked: false },
+      { name: 'alipay', checked: false }
+    ],
     identity_list:[],
     id_list: [],
     hidden: true,
@@ -29,6 +34,18 @@ Page({
    */
   onLoad: function (options) {
 
+  },
+  radioChange: function (e) {
+    var items = this.data.paymentOptions;
+    var selectedOption = e.detail.value;
+
+    for (var i = 0; i < items.length; i++) {
+      items[i].checked = items[i].name === selectedOption;
+    }
+
+    this.setData({
+      paymentOptions: items
+    });
   },
 
   checkboxChange(e) {
@@ -59,10 +76,13 @@ Page({
     if (!this.data.count) {
       var self = this
       wx.request({
-        url: 'http://localhost:8080/Passenger/choose',
+        url: 'http://localhost:8080/Ticket/choose',
         data: {
           // 发送所有选中乘客id和身份数据
           account: wx.getStorageSync('user').account,
+          date:wx.getStorageSync('go_date').account,
+          train_number:wx.getStorageSync('train_number').account,
+          paymentOptions:self.data.paymentOptions,
           count: self.data.count,
           id_list: self.data.id_list,
           identity_list: self.data.identity_list
@@ -73,13 +93,13 @@ Page({
           })
           if (res.data) {
             wx.showToast({
-              title: '购票成功，请前往订单页面查询车票',
+              title: '订单生成成功，请尽快支付',
               icon: 'success',
               duration: 2000
             })
           } else {
             wx.showToast({
-              title: '购票失败',
+              title: '订单生成失败',
               icon: 'error',
               duration: 2000
             })
