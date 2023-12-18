@@ -9,7 +9,8 @@
     "pages/query/query",
     "pages/userInfo/userInfo",
     "pages/register/register",
-    "pages/modify/modify",
+    "pages/modify_user/modify_user",
+    "pages/modify_passenger/modify_passenger",
     "pages/passenger/passenger",
     "pages/add_passenger/add_passenger"
   ],

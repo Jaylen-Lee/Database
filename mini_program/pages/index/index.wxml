@@ -18,7 +18,7 @@
         </view>
       </view>
       <view class="query-date">
-          <picker mode="date" value="{{date}}" start="{{current_date}}" end="{{end_date}}" bindchange="bindDateChange">
+          <picker mode="date" value="2023-06-17" start="{{current_date}}" end="{{end_date}}" bindchange="bindDateChange">
                 <button type="default">请选择出发日期： {{year}}年{{month}} 月{{day}} 日</button>
             </picker>
       </view>

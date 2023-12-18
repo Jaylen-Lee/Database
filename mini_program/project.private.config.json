@@ -10,7 +10,7 @@
       "list": [
         {
           "name": "",
-          "pathName": "pages/modify/modify",
+          "pathName": "pages/modify_user/modify_user",
           "query": "",
           "launchMode": "default",
           "scene": null

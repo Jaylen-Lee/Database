@@ -2,16 +2,16 @@
 //获取应用实例
 var app = getApp()
 
-var timestamp = Date.parse(new Date());
+var timestamp = Date.parse("2023-06-17");
 var date = new Date(timestamp);
-
+console.log(date)
 Page({
   data: {
     year : date.getFullYear(),
-    month: (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1),
-    day: date.getDate() < 10 ? '0' + date.getDate() : date.getDate(),
-    current_date: '',
-    end_date: '',
+    month: ('0' + (date.getMonth() + 1)).slice(-2),
+    day: ('0' + date.getDate()).slice(-2), 
+    current_date: "2023-06-17",
+    end_date: "2023-07-02",
     startName: '出发站',
     endName: '目的站',
     stu_ticket: false
@@ -67,33 +67,36 @@ Page({
       });
     }
     // 动态决定查询日期范围
-    let today = new Date();
+    /*let today = new Date();
     let year = today.getFullYear();
     let month = today.getMonth() + 1; // 月份是从 0 开始的，所以需要加 1
-    let day = today.getDate();
+    let day = today.getDate();*/
 
     // 格式化初始日期，例如：2023-09-01
-    let formattedDate = `${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day}`;
+    /*let formattedDate = `${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day}`;*/
 
     // 计算结束日期，假设要设置为初始日期的三个月后
-    let endMonth = month + 3;
+    /*let endMonth = month + 3;
     let endYear = year + Math.floor(endMonth / 12);
-    endMonth = endMonth % 12 || 12;
+    endMonth = endMonth % 12 || 12;*/
 
-    let formattedEndDate = `${endYear}-${endMonth < 10 ? '0' + endMonth : endMonth}-${day < 10 ? '0' + day : day}`;
+    /*let formattedEndDate = `${endYear}-${endMonth < 10 ? '0' + endMonth : endMonth}-${day < 10 ? '0' + day : day}`;
     this.setData({
       current_date : formattedDate,
       end_date : formattedEndDate
-    })
+    })*/
     // 如果存在缓存的日期，应重置为当前日期
     var m = wx.getStorageSync("month")
     var d = wx.getStorageSync("day")
     if (m && d) {
       this.setData({
-        month: (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1),
-        day: date.getDate() < 10 ? '0' + date.getDate() : date.getDate()
+        month: ('0' + (date.getMonth() + 1)).slice(-2),
+        day: ('0' + date.getDate()).slice(-2)
       })
+      wx.setStorageSync('month', this.data.month)
+      wx.setStorageSync('day', this.data.day)
     }
+    console.log(this.data.day)
     wx.setStorageSync('stu_ticket', this.data.stu_ticket)
   },
 
@@ -139,8 +142,8 @@ Page({
     const selectedDateObject = new Date(selectedDate);
     // 获取月份和日期
     const selectedYear = selectedDateObject.getFullYear();
-    const selectedMonth = selectedDateObject.getMonth() + 1; // 月份是从 0 开始的，所以需要加 1
-    const selectedDay = selectedDateObject.getDate();
+    const selectedMonth = ('0' + (selectedDateObject.getMonth() + 1)).slice(-2);// 月份是从 0 开始的，所以需要加 1
+    const selectedDay = ('0' + selectedDateObject.getDate()).slice(-2);
     this.setData({
         year : selectedYear,
         month : selectedMonth,
