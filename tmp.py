@@ -177,42 +177,115 @@ def find_user_by_account():
         connection.close()
 
 
-# Placeholder for querying train information
+# Define price coefficients for each train type
+TRAIN_TYPE_COEFFICIENTS = {
+    '普慢': 1.0,
+    '普快': 1.2,
+    '空调普快': 1.5,
+    '城际列车': 1.8,
+    '城际高速': 2.0,
+}
+
+
+# Route for querying train information
 @app.route('/Train/query', methods=['GET'])
-def query_train():
-    start_station = request.args.get('start_station')
-    arrive_station = request.args.get('arrive_station')
-    go_date = request.args.get('go_date')
-    ticket_type = request.args.get('type')  # Correcting the parameter name
-
-    # Connect to MySQL database
-    connection = pymysql.connect(**db_config)
-    print(start_station, arrive_station, go_date, ticket_type)
-
+def query_train_info():
     try:
-        with connection.cursor() as cursor:
-            # Query train information based on parameters
-            cursor.execute("SELECT t.start_station, t.arrive_station, t.go_time, t.arrival_time, t.train_number, "
-                           "t.type, t.price, t.go_date, s.remaining_seats "
-                           "FROM train t "
-                           "JOIN seats s ON t.train_number = s.train_number "
-                           "WHERE t.start_station = %s AND t.arrive_station = %s AND t.go_date = %s "
-                           "AND t.type = %s", (start_station, arrive_station, go_date, ticket_type))
+        # Get parameters from the request
+        start_station = request.args.get('start_station')
+        arrive_station = request.args.get('arrive_station')
+        go_date = request.args.get('go_date')
 
-            train_info = cursor.fetchall()
-            print(train_info)
+        # Connect to MySQL database
+        connection = pymysql.connect(**db_config)
+        print(start_station, arrive_station, go_date)
 
-            # Adjust the price for student tickets
-            for info in train_info:
-                if info['type'] == '学生票':
-                    info['price'] = info['price'] * 0.75
+        try:
+            with connection.cursor() as cursor:
+                # First query: Find train information for the start station
+                start_station_query = """
+                    SELECT train_number, arrival_time, stop_order
+                    FROM arrival_time
+                    WHERE station_name = %s
+                """
+                cursor.execute(start_station_query, (start_station,))
+                start_station_info = cursor.fetchall()
 
-        return jsonify(train_info)
+                # Second query: Find train information for the arrival station
+                arrive_station_query = """
+                    SELECT train_number, arrival_time, stop_order
+                    FROM arrival_time
+                    WHERE station_name = %s
+                """
+                cursor.execute(arrive_station_query, (arrive_station,))
+                arrive_station_info = cursor.fetchall()
+
+                # Filter the trains with the correct stop_order for arrival station
+                valid_trains = [
+                    {
+                        'train_number': start_info['train_number'],
+                        'start_station': start_station,
+                        'arrive_station': arrive_station,
+                        'go_time': format_time(start_info['arrival_time']),
+                        'arrive_time': format_time(arrive_info['arrival_time']),
+                        'price': 50,  # You need to calculate the price based on your logic
+                        'go_date': str(go_date),
+                        'remain': start_info['remaining_seats']
+                    }
+                    for start_info in start_station_info
+                    for arrive_info in arrive_station_info
+                    if start_info['train_number'] == arrive_info['train_number']
+                       and start_info['stop_order'] < arrive_info['stop_order']
+                ]
+
+                # Query the train table to get train_type
+                train_type_query = """
+                    SELECT train_number, train_type
+                    FROM train
+                    WHERE train_number IN (%s)
+                """
+                train_numbers = [train['train_number'] for train in valid_trains]
+                in_clause = ', '.join(['%s'] * len(train_numbers))
+                train_type_query = train_type_query % in_clause
+                cursor.execute(train_type_query, tuple(train_numbers))
+                train_types = cursor.fetchall()
+
+                # Map train types to the valid trains
+                train_type_dict = {train['train_number']: train['train_type'] for train in train_types}
+                for train in valid_trains:
+                    train['train_type'] = train_type_dict.get(train['train_number'], 'Unknown')
+                    # Calculate running time in minutes
+                    running_time_minutes = (
+                                                   arrow.get(train['arrive_time']) - arrow.get(train['go_time'])
+                                           ).seconds // 60
+
+                    # Determine base price based on running time
+                    base_price = calculate_base_price(running_time_minutes)
+
+                    # Get train type and apply price coefficient
+                    train_type = train.get('train_type', 'Unknown')
+                    price_coefficient = TRAIN_TYPE_COEFFICIENTS.get(train_type, 1.0)
+
+                    # Calculate final ticket price
+                    ticket_price = base_price * price_coefficient
+
+                    # Update the train dictionary with the calculated price
+                    train['price'] = round(ticket_price, 2)
+
+                return jsonify(valid_trains)
+
+        except Exception as e:
+            print("failed")
+            return jsonify({'error': str(e)})
+        finally:
+            connection.close()
+
     except Exception as e:
-        print("failed")
         return jsonify({'error': str(e)})
-    finally:
-        connection.close()
+
+def calculate_base_price(running_time_minutes):
+    # based on the running time. This is just a placeholder
+    return max(50, running_time_minutes * 0.1)  # Adjust as needed
 
 
 # Route for modifying user/administrator information
