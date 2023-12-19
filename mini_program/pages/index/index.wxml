@@ -22,12 +22,12 @@
           <button type="default">请选择出发日期： {{year}}年{{month}} 月{{day}} 日</button>
         </picker>
       </view>
-      <view class="query-row">
+      <!--<view class="query-row">
         <view class="train-checked">
           <text>学生票</text>
           <switch checked="{{stu_ticket}}" bindchange="stu_ticket_choose" data-stu_ticket="{{stu_ticket}}" />
         </view>
-      </view>
+      </view>-->
       <button class='btn_query' bindtap="gotoQuery">查询</button>
     </view>
   </view>

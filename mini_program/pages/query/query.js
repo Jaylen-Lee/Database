@@ -29,7 +29,7 @@ Page({
         start_station: wx.getStorageSync('startName'),
         arrive_station: wx.getStorageSync('endName'),
         go_date: wx.getStorageSync('year') + wx.getStorageSync('month') + '-' + wx.getStorageSync('day'),
-        type: (wx.getStorageSync('stu_ticket') ? '学生票' : '成人票')
+        // type: (wx.getStorageSync('stu_ticket') ? '学生票' : '成人票')
       },
       success: function(res) {
 
