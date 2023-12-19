@@ -2,7 +2,7 @@
 <view class="amountBg">
   <image class="img" src="{{imageURL}}" hidden="{{!flag}}" mode="cover" />
   <view class="account">
-    <view hidden="{{!flag}}">{{user.name}}</view>
+    <view hidden="{{!flag}}">{{user.username}}</view>
     <view hidden="{{flag}}" bindtap="login" class="loginbtn">点击以登录</view>
   </view>
   <view class="nav" bindtap="gotoUserInfo" hidden="{{!flag}}">></view>

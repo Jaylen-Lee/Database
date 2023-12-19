@@ -11,14 +11,15 @@ Page({
     account: "暂无",
     count: 0,
     inputShowed: false,
-    ordersList: [{
+    ordersList : [],
+    /*ordersList: [{
       order_number: "000020beb3b359b",
       purchase_time: "2021-09-01 02:53:03",
       payment_amount: 7319,
       payment_method: "alipay",
       status: "completed",
       user_account: "805762918578633"
-    }],
+    }],*/
     inputdata: '-',
     hidden: true
   },
@@ -34,7 +35,8 @@ Page({
     wx.request({
       url: 'http://localhost:8080/Order/findbyaccount',
       data: {
-        account: wx.getStorageSync('user').id
+        is_ad : wx.getStorageSync('is_ad'),
+        account: wx.getStorageSync('user').account
       },
       success: function (res) {
 

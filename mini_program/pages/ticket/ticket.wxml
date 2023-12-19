@@ -10,8 +10,8 @@
   <view class="ticket">
     <view class="row1">
       <view class="c1">
-        <view>{{item.depareture_station}}</view>
-        <view>{{item.depareture_time}}</view>
+        <view>{{item.departure_station}}</view>
+        <view>{{item.departure_time}}</view>
       </view>
 
       <view class="c2">

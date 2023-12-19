@@ -487,8 +487,12 @@ def find_tickets_by_order():
 
                 # Convert the result to a list of dictionaries
                 result = [
-                    {'ticket_number': ticket[0], 'train_number': ticket[1], 'date': ticket[2], 'id_number': ticket[3],
-                     'order_number': ticket[4], 'fare': ticket[5]} for ticket in tickets]
+                    {'ticket_number': ticket['ticket_number'], 'train_number': ticket['train_number'],
+                     'date': str(ticket['date']), 'id_number': ticket['id_number'],
+                     'order_number': ticket['order_number'], 'fare': ticket['fare'],
+                     'arrival_time': str(ticket['arrival_time']), 'departure_time': str(ticket['departure_time']),
+                     'departure_station': ticket['departure_station'], 'destination_station': ticket['destination_station']} for
+                    ticket in tickets]
 
                 return jsonify(result)
         except Exception as e:
@@ -497,7 +501,6 @@ def find_tickets_by_order():
             connection.close()
     except Exception as e:
         return jsonify({'error': str(e)})
-
 
 # Route for finding all orders for a specific user
 @app.route('/Order/findbyaccount', methods=['GET'])

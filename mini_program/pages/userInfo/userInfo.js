@@ -5,13 +5,14 @@ Page({
    * 页面的初始数据
    */
   data: {
-    user:{
+      user : {},
+    /*user:{
       account : "123567",
       username : "aad",
       name : "阿萨大大",
       password : "78946",
       phone : "763787268"
-    },
+    },*/
     is_ad : false
   },
 

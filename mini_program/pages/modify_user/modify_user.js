@@ -6,9 +6,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-    user: { username : 'test',
+    /*user: { username : 'test',
     name: 'test',
-    phone: 'test',},
+    phone: 'test',},*/
+    user : {},
     is_ad : false,
     username : '',
     name: '',
@@ -29,9 +30,11 @@ Page({
     wx.request({
       url: 'http://localhost:8080/User/findby_account',
       data: {
-        id: wx.getStorageSync('user').account
+        is_ad : wx.getStorageSync('is_ad'),
+        account: wx.getStorageSync('user').account
       },
       success: function(res) {
+        console.log(res.data)
         self.setData({
           user: res.data,
           is_ad : wx.getStorageSync('is_ad')
