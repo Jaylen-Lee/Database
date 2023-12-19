@@ -52,12 +52,14 @@ Page({
       account: wx.getStorageSync('user').account,
       name: (self.data.flag1 ? self.data.name : self.data.passenger.name),
       identity: (self.data.flag2 ? self.data.identity :self.data.passenger.identity),
-      phone: (self.data.flag3 ? self.data.phone :self.data.passenger.phone)
+      phone: (self.data.flag3 ? self.data.phone :self.data.passenger.phone), 
+      id_number: self.data.passenger.id_number, // Include the id_number parameter
     }
     // console.log(data) 
     wx.request({
       url: 'http://localhost:8080/Passenger/modify',
       data: data,
+      method: 'POST',
       success: function(res) {
         wx.showToast({
           title: '修改成功',
