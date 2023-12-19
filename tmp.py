@@ -230,7 +230,7 @@ def query_train_info():
                         'arrive_time': format_time(arrive_info['arrival_time']),
                         'price': 50,  # You need to calculate the price based on your logic
                         'go_date': str(go_date),
-                        'remain': start_info['remaining_seats']
+                        'remain': get_remaining_seats(connection, start_info['train_number'], go_date)
                     }
                     for start_info in start_station_info
                     for arrive_info in arrive_station_info
@@ -239,7 +239,7 @@ def query_train_info():
                 ]
 
                 # Query the train table to get train_type
-                train_type_query = """
+                train_type_query = """ 
                     SELECT train_number, train_type
                     FROM train
                     WHERE train_number IN (%s)
@@ -253,17 +253,16 @@ def query_train_info():
                 # Map train types to the valid trains
                 train_type_dict = {train['train_number']: train['train_type'] for train in train_types}
                 for train in valid_trains:
-                    train['train_type'] = train_type_dict.get(train['train_number'], 'Unknown')
+                    train_type = train_type_dict.get(train['train_number'], 'Unknown')
                     # Calculate running time in minutes
-                    running_time_minutes = (
-                                                   arrow.get(train['arrive_time']) - arrow.get(train['go_time'])
+                    # pdb.set_trace()
+                    running_time_minutes = (arrow.get(train['arrive_time'], 'HH:mm:ss') - arrow.get(train['go_time'], 'HH:mm:ss')
                                            ).seconds // 60
 
                     # Determine base price based on running time
                     base_price = calculate_base_price(running_time_minutes)
 
                     # Get train type and apply price coefficient
-                    train_type = train.get('train_type', 'Unknown')
                     price_coefficient = TRAIN_TYPE_COEFFICIENTS.get(train_type, 1.0)
 
                     # Calculate final ticket price
@@ -287,6 +286,23 @@ def calculate_base_price(running_time_minutes):
     # based on the running time. This is just a placeholder
     return max(50, running_time_minutes * 0.1)  # Adjust as needed
 
+def get_remaining_seats(connection, train_number, go_date):
+    with connection.cursor() as cursor:
+        remaining_seats_query = """
+            SELECT remaining_seats
+            FROM seats
+            WHERE train_number = %s AND date = %s
+        """
+        cursor.execute(remaining_seats_query, (train_number, go_date))
+        result = cursor.fetchone()
+        return result['remaining_seats'] if result else 0
+
+def format_time(raw_time):
+    # Assuming raw_time is a timedelta object
+    hours, remainder = divmod(raw_time.seconds, 3600)
+    minutes, seconds = divmod(remainder, 60)
+    formatted_time = "{:02}:{:02}:{:02}".format(hours, minutes, seconds)
+    return formatted_time
 
 # Route for modifying user/administrator information
 @app.route('/User/modify', methods=['POST'])
