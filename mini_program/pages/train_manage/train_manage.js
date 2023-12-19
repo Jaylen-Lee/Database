@@ -7,7 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    train_list : [{train_number  :"eee13",station_name:"aaa",arrival_time:"18:00:06",seats_num : 1200, mileage:555, train_type : "普快",stop_order: 1}],
+    train_list : [],
+    /*train_list : [{train_number  :"eee13",station_name:"aaa",arrival_time:"18:00:06",seats_num : 1200, mileage:555, train_type : "普快",stop_order: 1}],*/
     inputShowed : false,
     inputVal : ""
   },

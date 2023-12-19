@@ -7,11 +7,12 @@ Page({
    * 页面的初始数据
    */
   data: {
-    user_list : [{
+    user_list : [],
+    /*user_list : [{
       account : "555555",username: "jksgjsbb",password : "6545646",noOfOrder:30
     },{
       account : "54654555",username: "jtbhbbsbb",password : "65415146",noOfOrder:30
-    }],
+    }],*/
     inputShowed : false,
     inputVal : ""
   },
@@ -19,7 +20,7 @@ Page({
     this.setData({
       inputVal: e.detail.value
     })
-    console.log(this.data.inputVal);
+    // console.log(this.data.inputVal);
   },
   /**
    * 生命周期函数--监听页面加载
@@ -60,6 +61,7 @@ Page({
         account : that.data.inputVal
       },
       success: function (res) {
+        // console.log(res.data)
         // 请求成功，处理响应数据
         that.setData({
           user_list : res.data

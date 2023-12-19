@@ -23,7 +23,7 @@ Page({
     wx.request({
       url: 'http://localhost:8080/User/findby_account',
       data:{
-        account :wx.getStorageSync('user').id,
+        account :wx.getStorageSync('user').account,
         is_ad : wx.getStorageSync('is_ad')
       },
       success:function(res){

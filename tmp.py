@@ -583,7 +583,7 @@ def find_users_by_account():
                 users = cursor.fetchall()
 
                 # Convert the result to a list of dictionaries
-                result = [{'account': user[0], 'username': user[1], 'password': user[2], 'noOfOrder': user[3]} for
+                result = [{'account': user['account'], 'username': user['username'], 'password': user['password'], 'noOfOrder': user['noOfOrder']} for
                           user in users]
 
                 return jsonify(result)
