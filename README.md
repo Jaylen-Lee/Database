@@ -1,11 +1,11 @@
 "# Database" 
-<<<<<<< HEAD
-"# Database" 
-=======
 # 前端进度
 ### 未完成
 - 查看用户信息及退出模块，对应userinfo文件
+<<<<<<< Updated upstream
 >>>>>>> 72de691e4037fdf97f3463a2521756d005d125a6
+=======
+>>>>>>> Stashed changes
 
 # DATA生成
 

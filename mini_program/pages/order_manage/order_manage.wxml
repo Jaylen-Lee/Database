@@ -1,0 +1,63 @@
+<view class="page" data-weui-theme="{{theme}}" data-weui-mode="{{mode}}">
+  <view class="page__bd">
+    <view class="weui-search-bar {{inputShowed ? 'weui-search-bar_focusing' : ''}}" id="searchBar">
+      <form class="weui-search-bar__form" aria-role="combobox" aria-haspopup="true" aria-expanded="{{inputVal.length > 0 ? 'true' : 'false'}}" aria-owns="searchResult">
+        <view class="weui-search-bar__box">
+          <i class="weui-icon-search"></i>
+          <input aria-controls="searchResult" type="text" class="weui-search-bar__input" placeholder="请输入用户账号" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputCom" />
+          <view aria-role="button" aria-label="清除" class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput"></view>
+        </view>
+        <label class="weui-search-bar__label" bindtap="showInput">
+          <i class="weui-icon-search"></i>
+          <span class="weui-search-bar__text">搜索</span>
+        </label>
+      </form>
+      <view aria-role="button" class="weui-search-bar__cancel-btn" bindtap="hideInput">取消</view>
+    </view>
+  </view>
+</view>
+
+<block wx:for="{{ordersList}}" class="orders">
+      <view class="item" bindtap="bindSelect" data-order-number="{{item.order_number}}">
+        <view>
+          <view class="index">{{index+1}}</view>
+          <view class="divLine"></view>
+
+          <view class="row">
+            <text class="left-label">订单编号:</text>
+            <text class="right-text">{{item.order_number}}</text>
+          </view>
+
+          <view class="divLine"></view>
+          <view class="row">
+            <text class="left-label">用户账号:</text>
+            <text class="right-text">{{item.user_account}}</text>
+          </view>
+          <view class="divLine"></view>
+
+          <view class="row">
+            <text class="left-label">订单状态:</text>
+            <text class="right-text">{{item.status}}</text>
+          </view>
+          <view class="divLine"></view>
+
+          <view class="row">
+            <text class="left-label">支付金额:</text>
+            <text class="right-text">{{item.payment_amount}}元</text>
+          </view>
+          <view class="divLine"></view>
+
+          <view class="row">
+            <text class="left-label">支付方式:</text>
+            <text class="right-text">{{item.payment_method}}</text>
+          </view>
+          <view class="divLine"></view>
+
+          <view class="row">
+            <text class="left-label">下单时间:</text>
+            <text class="right-text">{{item.purchase_time}}</text>
+          </view>
+          <view class="divLine"></view>
+        </view>
+    </view>
+  </block>

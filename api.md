@@ -169,7 +169,6 @@
 - **返回值[{item}]**  
   - 无
 
-<<<<<<< HEAD
 ### 11.基于查询得到的车次信息购票
 
 - **URL**
@@ -239,6 +238,8 @@
   - 根据order_number查询车票信息
 - **返回值[{item}]**  
   - list形式返回所属车票的全部信息
+
+
 ### 14.查询某一用户的所有订单信息
 - **URL**
   - `./Order/findbyaccount`
@@ -255,4 +256,35 @@
   - `payment_method`（支付方式）
   - `status`（订单状态）
   - `user_account`（用户账号）
->>>>>>> 319d6cb726618aceace4ff7dc8fa61e8db83a7c2
+
+### 15.管理员查询某一车次的信息
+- **URL**
+  - `./Train/findbyid`
+- **方法**
+  - `GET`
+- **参数**
+  - `train_number`
+- **后端操作** 
+  - 联合车次表和到达时间表，返回需要的信息即可
+- **返回值[{item}]**  
+  - `train_number`（车次编号）
+  - `station_name`（当前到达车站名）
+  - `arrival_time`（当前车站的到达时间）
+  - `stop_order`（停靠顺序编号）
+  - `seats_num` （该车次的座位数） 
+  - `mileage`（该车次的总里程）
+  - `train_type`（类型，普快等）
+### 16.管理员查询用户信息（模糊匹配）
+- **URL**
+  - `./Ad/finduser`
+- **方法**
+  - `GET`
+- **参数**
+  - `account`（模糊账号）
+- **后端操作** 
+  - 对用户表进行模糊查询，返回用户信息
+- **返回值[{item}]** 
+  - `account`
+  - `username`
+  - `password`
+  - `noOfOrder`

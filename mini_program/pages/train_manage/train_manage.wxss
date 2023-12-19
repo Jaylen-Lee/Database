@@ -1,0 +1,33 @@
+.passenger-list {
+  margin-top: 30rpx;
+  padding: 20rpx;
+}
+
+.passenger-item {
+  background-color: rgb(223, 223, 213);
+  margin-bottom: 20rpx;
+  padding: 10rpx;
+  border: 1rpx solid rgb(88, 171, 219);
+}
+
+.first-line {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10rpx;
+  font-size: 30rpx; /* 调整字体大小 */
+}
+
+.second-line {
+  display: flex;
+  justify-content: space-between;
+  font-size: 30rpx; /* 调整字体大小 */
+}
+.left-label {
+  width: 350rpx;
+  margin-right: 5px; /* 标签和文本之间的间距，根据需要调整 */
+}
+
+.right-text {
+  width: 300rpx;
+  text-align: left; /* 文本左对齐 */
+}

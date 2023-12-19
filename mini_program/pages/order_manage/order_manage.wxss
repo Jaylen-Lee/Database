@@ -1,0 +1,79 @@
+.hiddenLayer {
+  width: 400rpx;
+  height: 400rpx;
+  position: relative;
+  justify-content: center;
+  margin: 400rpx auto;
+  display: flex;
+}
+
+.img {
+  position: absolute;
+  width: 300rpx;
+  height: 300rpx;
+}
+
+.text {
+  position: absolute;
+  margin-top: 350rpx;
+  color: #808080;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  margin: 10px 10px;
+}
+
+.left {
+  width: 180rpx;
+  text-align: justify;
+  text-align-last: justify;
+}
+
+.item{
+  margin: 100rpx 30rpx;
+}
+
+.divLine {
+  background: #e0e3da;
+  width: 100%;
+  height: 5rpx;
+}
+
+.item{
+  border: 2rpx solid #00BFFF;
+  border-radius: 10rpx;
+}
+
+
+.zw {
+  font-size: 15px;
+}
+
+.container {
+  flex-direction: column;
+  display: flex;
+}
+
+.left-ct {
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 30px;
+}
+
+.sr {
+  font-size: 18px;
+  margin-top: 8px;
+  margin-left: 8px;
+}
+
+.left-label {
+  width: 180rpx;
+  margin-right: 5px; /* 标签和文本之间的间距，根据需要调整 */
+}
+
+.right-text {
+  width: 450rpx;
+  text-align: left; /* 文本左对齐 */
+}

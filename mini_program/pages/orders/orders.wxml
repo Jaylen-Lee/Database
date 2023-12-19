@@ -38,32 +38,32 @@
           <view class="divLine"></view>
 
           <view class="row">
-            <text class="left">订单编号:</text>
-            <text class="right">{{item.order_number}}</text>
+            <text class="left-label">订单编号:</text>
+            <text class="right-text">{{item.order_number}}</text>
           </view>
           <view class="divLine"></view>
 
           <view class="row">
-            <text class="left">订单状态:</text>
-            <text class="right">{{item.status}}</text>
+            <text class="left-label">订单状态:</text>
+            <text class="right-text">{{item.status}}</text>
           </view>
           <view class="divLine"></view>
 
           <view class="row">
-            <text class="left">支付金额:</text>
-            <text class="right">{{item.payment_amount}}元</text>
+            <text class="left-label">支付金额:</text>
+            <text class="right-text">{{item.payment_amount}}元</text>
           </view>
           <view class="divLine"></view>
 
           <view class="row">
-            <text class="left">支付方式:</text>
-            <text class="right">{{item.payment_method}}</text>
+            <text class="left-label">支付方式:</text>
+            <text class="right-text">{{item.payment_method}}</text>
           </view>
           <view class="divLine"></view>
 
           <view class="row">
-            <text class="left">下单时间:</text>
-            <text class="right">{{item.purchase_time}}</text>
+            <text class="left-label">下单时间:</text>
+            <text class="right-text">{{item.purchase_time}}</text>
           </view>
           <view class="divLine"></view>
           <!-- <view wx:if="{{indexofStr.includes(item.status,'completed')>-1}}">

@@ -4,7 +4,7 @@
   <image src="../../images/top/index2.png"></image>
 </view>
 <view class="bg">
-  <view class="container">
+  <view class="container" wx:if="{{!is_ad}}">
     <view class="query-box">
       <view class="query-city">
         <view class="begin-city">
@@ -18,17 +18,43 @@
         </view>
       </view>
       <view class="query-date">
-          <picker mode="date" value="2023-06-17" start="{{current_date}}" end="{{end_date}}" bindchange="bindDateChange">
-                <button type="default">请选择出发日期： {{year}}年{{month}} 月{{day}} 日</button>
-            </picker>
+        <picker mode="date" value="2023-06-17" start="{{current_date}}" end="{{end_date}}" bindchange="bindDateChange">
+          <button type="default">请选择出发日期： {{year}}年{{month}} 月{{day}} 日</button>
+        </picker>
       </view>
       <view class="query-row">
         <view class="train-checked">
           <text>学生票</text>
-          <switch checked="{{stu_ticket}}" bindchange="stu_ticket_choose" data-stu_ticket="{{stu_ticket}}"/>
+          <switch checked="{{stu_ticket}}" bindchange="stu_ticket_choose" data-stu_ticket="{{stu_ticket}}" />
         </view>
       </view>
       <button class='btn_query' bindtap="gotoQuery">查询</button>
+    </view>
+  </view>
+  <!-- 在对应的.wxml文件中添加 HTML 结构 -->
+  <view class="container" wx:if="{{is_ad}}">
+    <view class="query-box">
+      <image src="/images/ad.jpeg" class="custom-image" ></image>
+      <!-- 订单管理 -->
+      <navigator url="/pages/order_manage/order_manage">
+        <view class="module" hover-class="module-hover" hover-stay-time="1000">
+          <text>订单管理</text>
+        </view>
+      </navigator>
+
+      <!-- 车次管理 -->
+      <navigator url="/pages/train_manage/train_manage">
+        <view class="module" hover-class="module-hover" hover-stay-time="1000">
+          <text>车次管理</text>
+        </view>
+      </navigator>
+
+      <!-- 用户管理 -->
+      <navigator url="/pages/user_manage/user_manage">
+        <view class="module" hover-class="module-hover" hover-stay-time="1000">
+          <text>用户管理</text>
+        </view>
+      </navigator>
     </view>
   </view>
 </view>

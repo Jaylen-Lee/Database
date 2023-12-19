@@ -26,5 +26,8 @@
         }
       ]
     }
+  },
+  "setting": {
+    "urlCheck": false
   }
 }
