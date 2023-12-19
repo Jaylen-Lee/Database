@@ -543,19 +543,19 @@ def find_train_by_id():
             with connection.cursor() as cursor:
                 # Query train information based on train number
                 cursor.execute(
-                    "SELECT train_number, station_name, arrival_time, stop_order, seats_num, mileage, train_type FROM train "
+                    "SELECT arrival_time.train_number, station_name, arrival_time, stop_order, seats_num, mileage, train_type FROM train "
                     "JOIN arrival_time ON train.train_number = arrival_time.train_number "
-                    "WHERE train.train_number = %s", (train_number,))
+                    "WHERE train.train_number = %s ORDER BY stop_order", (train_number,))
                 train_info = cursor.fetchall()
 
                 # Convert the result to a list of dictionaries
-                result = [{'train_number': info[0],
-                           'station_name': info[1],
-                           'arrival_time': info[2],
-                           'stop_order': info[3],
-                           'seats_num': info[4],
-                           'mileage': info[5],
-                           'train_type': info[6]} for info in train_info]
+                result = [{'train_number': info['train_number'],
+                           'station_name': info['station_name'],
+                           'arrival_time': str(info['arrival_time']),
+                           'stop_order': info['stop_order'],
+                           'seats_num': info['seats_num'],
+                           'mileage': info['mileage'],
+                           'train_type': info['train_type']} for info in train_info]
 
                 return jsonify(result)
         except Exception as e:

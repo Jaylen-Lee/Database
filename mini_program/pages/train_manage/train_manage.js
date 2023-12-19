@@ -16,7 +16,7 @@ Page({
     this.setData({
       inputVal: e.detail.value
     })
-    console.log(this.data.inputVal);
+    // console.log(this.data.inputVal);
   },
   /**
    * 生命周期函数--监听页面加载
