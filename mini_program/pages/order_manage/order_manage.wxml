@@ -4,7 +4,7 @@
       <form class="weui-search-bar__form" aria-role="combobox" aria-haspopup="true" aria-expanded="{{inputVal.length > 0 ? 'true' : 'false'}}" aria-owns="searchResult">
         <view class="weui-search-bar__box">
           <i class="weui-icon-search"></i>
-          <input aria-controls="searchResult" type="text" class="weui-search-bar__input" placeholder="请输入用户账号" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputCom" />
+          <input aria-controls="searchResult" type="text" class="weui-search-bar__input" placeholder="请输入用户账号" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputCom" bindconfirm="search" />
           <view aria-role="button" aria-label="清除" class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput"></view>
         </view>
         <label class="weui-search-bar__label" bindtap="showInput">
@@ -20,7 +20,7 @@
 <block wx:for="{{ordersList}}" class="orders">
       <view class="item" bindtap="bindSelect" data-order-number="{{item.order_number}}">
         <view>
-          <view class="index">{{index+1}}</view>
+          <view class="index" >{{index+1}}</view>
           <view class="divLine"></view>
 
           <view class="row">

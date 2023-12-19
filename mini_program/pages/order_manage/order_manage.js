@@ -11,30 +11,31 @@ Page({
     account: "暂无",
     count: 0,
     inputShowed: false,
-    ordersList: [{
+    inputVal : '',
+    ordersList : [],
+    /*ordersList: [{
       "order_number": "000020beb3b359b",
       "purchase_time": "2021-09-01 02:53:03",
       "payment_amount": 7319,
       "payment_method": "alipay",
       "status": "completed",
       "user_account": "805762918578633"
-    }],
-    inputdata: '-',
+    }],*/
     hidden: true
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  search: function (options) {
     var self = this;
     self.setData({
       account:wx.getStorageSync('user').account
     })
     wx.request({
-      url: 'http://localhost:8080/Orders/findbyaccount',
+      url: 'http://localhost:8080/Order/findbyaccount',
       data: {
-        account: wx.getStorageSync('user').id
+        account: self.data.inputVal
       },
       success: function (res) {
 
@@ -70,7 +71,7 @@ Page({
 
   inputCom: function (e) {
     this.setData({
-      inputdata: e.detail.value
+      inputVal: e.detail.value
     })
     // console.log(this.data.inputdata);
   },
@@ -103,7 +104,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.onLoad()
   },
 
   /**

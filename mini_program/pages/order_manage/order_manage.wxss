@@ -42,7 +42,7 @@
 }
 
 .item{
-  border: 2rpx solid #00BFFF;
+  border: 5rpx solid #00BFFF;
   border-radius: 10rpx;
 }
 

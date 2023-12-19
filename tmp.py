@@ -512,12 +512,12 @@ def find_orders_by_account():
         try:
             with connection.cursor() as cursor:
                 # Query orders based on user account
-                cursor.execute("SELECT * FROM unpaid_order WHERE account = %s", (account,))
+                cursor.execute("SELECT * FROM `order` WHERE user_account = %s", (account,))
                 orders = cursor.fetchall()
 
                 # Convert the result to a list of dictionaries
-                result = [{'order_number': order[0], 'purchase_time': order[1], 'payment_amount': order[2],
-                           'payment_method': order[3], 'status': order[4], 'user_account': order[5]} for order in
+                result = [{'order_number': order['order_number'], 'purchase_time': str(order['purchase_time']), 'payment_amount': order['payment_amount'],
+                           'payment_method': order['payment_method'], 'status': order['status'], 'user_account': order['user_account']} for order in
                           orders]
 
                 return jsonify(result)

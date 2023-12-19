@@ -7,7 +7,7 @@
   background-color: rgb(223, 223, 213);
   margin-bottom: 20rpx;
   padding: 10rpx;
-  border: 1rpx solid rgb(88, 171, 219);
+  border: 1rpx solid rgb(13, 157, 240);
 }
 
 .first-line {
