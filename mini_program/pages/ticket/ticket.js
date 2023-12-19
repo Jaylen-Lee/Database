@@ -8,9 +8,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-    /*ticket_list: [{ticket_number:"00058002ad007a4137ad",train_number:"G107",depareture_station:"镇江南",destination_station:"苏州北",	fare:7511,	date:"2020-12-31",	id_number:"115392411616262566",	order_number:"652c66a58803090",	depareture_time:"12:43:00",	arrival_time:"13:21:00"},{ticket_number:"00058002ad007a4137ad",train_number:"G107",depareture_station:"lalala",destination_station:"苏州北",	fare:7511,	date:"2020-12-31",	id_number:"115392411616262566",	order_number:"652c66a58803090",	depareture_time:"12:43:00",	arrival_time:"13:21:00"}],*/
+    /*ticket_list: [{ticket_number:"00058002ad007a4137ad",train_number:"G107",departure_station:"镇江南",destination_station:"苏州北",	fare:7511,	date:"2020-12-31",	id_number:"115392411616262566",	order_number:"652c66a58803090",	departure_time:"12:43:00",	arrival_time:"13:21:00"},{ticket_number:"00058002ad007a4137ad",train_number:"G107",departure_station:"lalala",destination_station:"苏州北",	fare:7511,	date:"2020-12-31",	id_number:"115392411616262566",	order_number:"652c66a58803090",	departure_time:"12:43:00",	arrival_time:"13:21:00"}],*/
     ticket_list : [],
-    status:"unpaid",
+    status : '',
+    // status:"unpaid",
     // go_time: '',
     // arrive_time: '',
     name: '',

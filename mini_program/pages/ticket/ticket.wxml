@@ -1,5 +1,6 @@
-<view>正在查看用户{{name}}的订单{{order_number}}</view>
+
 <view class="bg-top">
+  <view style="font-size: larger; text-align: center;">正在查看用户{{name}}的订单{{order_number}}</view>
 </view>
 <wxs module="indexofStr">
   module.exports.includes = function (str, str_) {
