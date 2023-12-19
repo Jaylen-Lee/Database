@@ -29,7 +29,7 @@ Page({
     wx.request({
       url: 'http://localhost:8080/User/findby_account',
       data: {
-        id: wx.getStorageSync('user').id
+        id: wx.getStorageSync('user').account
       },
       success: function(res) {
         self.setData({
@@ -80,7 +80,7 @@ Page({
   
     // 构建要发送到服务器的数据对象
     var userData = {
-      id: wx.getStorageSync('user').id,
+      id: wx.getStorageSync('user').account,
       username: (self.data.flag1 ? self.data.username.trim() : wx.getStorageSync('user').username),
       password: (self.data.password ? self.data.password : wx.getStorageSync('user').password)
     };
@@ -96,6 +96,10 @@ Page({
     wx.request({
       url: 'http://localhost:8080/User/modify',
       data: userData,
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded' // Set the content type to form data
+      },
       success: function(res) {
         wx.showToast({
           title: '修改成功',
