@@ -77,6 +77,7 @@ Page({
       var self = this
       wx.request({
         url: 'http://localhost:8080/Ticket/choose',
+        method: 'POST',
         data: {
           // 发送所有选中乘客id和身份数据
           account: wx.getStorageSync('user').account,

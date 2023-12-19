@@ -32,7 +32,7 @@ Page({
       account:wx.getStorageSync('user').account
     })
     wx.request({
-      url: 'http://localhost:8080/Orders/findbyaccount',
+      url: 'http://localhost:8080/Order/findbyaccount',
       data: {
         account: wx.getStorageSync('user').id
       },
@@ -60,12 +60,14 @@ Page({
     })
   },
 
+
   bindSelect: function (e) {
     wx.navigateTo({
       url: '../ticket/ticket',
     })
     // wx.setStorageSync('ticket_id', e.currentTarget.dataset.ticketId)
     wx.setStorageSync('order_number', e.currentTarget.dataset.orderNumber)
+    wx.setStorageSync('status', e.currentTarget.dataset.status)
   },
 
   inputCom: function (e) {

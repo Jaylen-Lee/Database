@@ -1,42 +1,39 @@
+<view>正在查看用户{{name}}的订单{{order_number}}</view>
 <view class="bg-top">
 </view>
-<view class="ticket">
-  <view class="row1">
-    <view class="c1">
-      <view>{{ticket.depareture_station}}</view>
-      <view>{{ticket.depareture_time}}</view>
-    </view>
+<wxs module="indexofStr">
+  module.exports.includes = function (str, str_) {
+    return str.indexOf(str_);
+  }
+</wxs>
+<block wx:for="{{ticket_list}}">
+  <view class="ticket">
+    <view class="row1">
+      <view class="c1">
+        <view>{{item.depareture_station}}</view>
+        <view>{{item.depareture_time}}</view>
+      </view>
 
-    <view class="c2">
-      <view>{{ticket.train_number}}</view>
-      <image src="../../images/direction.png" class="img"></image>
-    </view>
+      <view class="c2">
+        <view>{{item.train_number}}</view>
+        <image src="../../images/direction.png" class="img"></image>
+      </view>
 
-    <view class="c3">
-      <view>{{ticket.destination_station}}</view>
-      <view>{{ ticket.arrival_time }}</view>
+      <view class="c3">
+        <view>{{item.destination_station}}</view>
+        <view>{{ item.arrival_time }}</view>
+      </view>
     </view>
+    <view class="row2">发车日期：{{item.date}}</view>
+    <view class="price">票价 ￥{{item.fare}}</view>
+    <view>取票码：{{item.ticket_number}}</view>
+    <view>乘客id：{{item.id_number}}</view>
   </view>
-  <view class="row2">发车日期：{{ticket.date}}</view>
-
+  <view class="line"></view>
+</block>
+<view wx:if="{{indexofStr.includes(status,'completed')>-1}}">
+  <button class="qd" type="primary" bindtap="formSubmit1">订单状态:completed    点击申请退款</button>
 </view>
-
-<view class="info">
-  <view class="row">
-    <view>{{name}}</view>
-    <view>{{ticket.type}}</view>
-  </view>
-  <view class="row">
-    <!-- <view>{{ticket.seat_type}}</view> -->
-    <view class="price">票价 ￥{{ticket.fare}}</view>
-  </view>
-
-  <view class="row">
-    <!-- <view>{{ticket.seat_type}}</view> -->
-    <view class="order">所属订单状态: {{ status }} </view>
-  </view>
+<view wx:if="{{indexofStr.includes(status,'unpaid')>-1}}">
+  <button class="qd" type="primary" bindtap="formSubmit2">订单状态:unpaid    点击支付订单</button>
 </view>
-
-
-
-<!-- <button class="btn" bindtap="dishonour">退票</button> -->

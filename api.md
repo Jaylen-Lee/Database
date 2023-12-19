@@ -188,7 +188,7 @@
 
   - `train_number`(所选车次)
 
-  - `paymentOptions`   固定格式，只会有一个checked为True即付款反射方式，paymentOptions: [
+  - `paymentOptions`   固定格式，只会有一个checked为True即付款方式，paymentOptions: [
 
        { name: 'cash', checked: false },
 
@@ -214,35 +214,34 @@
 
   - true/false 订单生成成功与否
 
-### 12.查询订单，付款与退款操作
+### 12.付款与退款操作
 
 - **URL**
-  - 
+  - ./Order/refund 或 ./Order/completed
 - **方法**
-  - 
+  - POST
 - **参数**
-  - 
+  - order_number 
 - **后端操作** 
-  - 
+  - 修改订单状态为refund或者completed
 - **返回值[{item}]**  
-  - 
+  - true/false 不过false的情况没有定义
 
 ### 13.查询订单下的车票
 
 - **URL**
-  - 
+  - ./Ticket/findbyId
 - **方法**
-  - 
+  - POST
 - **参数**
-  - 
+  - order_number
 - **后端操作** 
-  - 
+  - 根据order_number查询车票信息
 - **返回值[{item}]**  
-  - 
-=======
-### 11.查询某一用户的所有订单信息
+  - list形式返回所属车票的全部信息
+### 14.查询某一用户的所有订单信息
 - **URL**
-  - `./Orders/findbyaccount`
+  - `./Order/findbyaccount`
 - **方法**
   - `GET`
 - **参数**

@@ -13,26 +13,26 @@
   <view class="container">
     <view class="left-ct">
       <view class="weui-search-bar {{inputShowed ? 'weui-search-bar_focusing' : ''}}" id="searchBar">
-      <form class="weui-search-bar__form" aria-role="combobox" aria-haspopup="true" aria-expanded="{{inputVal.length > 0 ? 'true' : 'false'}}" aria-owns="searchResult">
-        <view class="weui-search-bar__box">
-          <i class="weui-icon-search"></i>
-          <input aria-controls="searchResult" type="text" class="weui-search-bar__input" placeholder="以xxxx-xx-xx格式筛选" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputCom" />
-          <view aria-role="button" aria-label="清除" class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput"></view>
-        </view>
-        <label class="weui-search-bar__label" bindtap="showInput">
-          <i class="weui-icon-search"></i>
-          <span class="weui-search-bar__text">搜索</span>
-        </label>
-      </form>
-      <view aria-role="button" class="weui-search-bar__cancel-btn" bindtap="hideInput">取消</view>
-    </view>
+        <form class="weui-search-bar__form" aria-role="combobox" aria-haspopup="true" aria-expanded="{{inputVal.length > 0 ? 'true' : 'false'}}" aria-owns="searchResult">
+          <view class="weui-search-bar__box">
+            <i class="weui-icon-search"></i>
+            <input aria-controls="searchResult" type="text" class="weui-search-bar__input" placeholder="以xxxx-xx-xx格式筛选" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputCom" />
+            <view aria-role="button" aria-label="清除" class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput"></view>
+          </view>
+          <label class="weui-search-bar__label" bindtap="showInput">
+            <i class="weui-icon-search"></i>
+            <span class="weui-search-bar__text">搜索</span>
+          </label>
+        </form>
+        <view aria-role="button" class="weui-search-bar__cancel-btn" bindtap="hideInput">取消</view>
+      </view>
       <input type="text" bindinput="inputCom" placeholder="" />
       <text>点击订单了解详情</text>
     </view>
   </view>
   <block wx:for="{{ordersList}}" class="orders">
     <view wx:if="{{indexofStr.includes(item.purchase_time,inputdata)>-1}}">
-      <view class="item" bindtap="bindSelect" data-order-number="{{item.order_number}}">
+      <view class="item" bindtap="bindSelect" data-order-number="{{item.order_number}}" data-status="{{item.status}}">
         <view>
           <view class="index">{{index+1}}</view>
           <view class="divLine"></view>
@@ -66,6 +66,12 @@
             <text class="right">{{item.purchase_time}}</text>
           </view>
           <view class="divLine"></view>
+          <!-- <view wx:if="{{indexofStr.includes(item.status,'completed')>-1}}">
+            <button class="qd" type="primary" bindtap="formSubmit1">申请退款</button>
+          </view>
+          <view wx:if="{{indexofStr.includes(item.status,'unpaid')>-1}}">
+            <button class="qd" type="primary" bindtap="formSubmit2">支付订单</button>
+          </view> -->
         </view>
       </view>
     </view>

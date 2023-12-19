@@ -8,11 +8,13 @@ Page({
    * 页面的初始数据
    */
   data: {
-    ticket: {ticker_number:"00058002ad007a4137ad",train_number:"G107",depareture_station:"镇江南",destination_station:"苏州北",	fare:7511,	date:"2020-12-31",	id_number:"115392411616262566",	order_number:"652c66a58803090",	depareture_time:"12:43:00",	arrival_time:"13:21:00"},
-    status:"unpaid"
+    ticket_list: [{ticket_number:"00058002ad007a4137ad",train_number:"G107",depareture_station:"镇江南",destination_station:"苏州北",	fare:7511,	date:"2020-12-31",	id_number:"115392411616262566",	order_number:"652c66a58803090",	depareture_time:"12:43:00",	arrival_time:"13:21:00"},{ticket_number:"00058002ad007a4137ad",train_number:"G107",depareture_station:"lalala",destination_station:"苏州北",	fare:7511,	date:"2020-12-31",	id_number:"115392411616262566",	order_number:"652c66a58803090",	depareture_time:"12:43:00",	arrival_time:"13:21:00"}],
+    status:"unpaid",
     // go_time: '',
     // arrive_time: '',
-    // name: ''
+    name: '',
+    order_number:"",
+
   },
 
   /**
@@ -21,19 +23,79 @@ Page({
   onLoad: function(options) {
     var self = this;
     wx.request({
-      url: 'http://localhost:8080/ticket/findById',
+      url: 'http://localhost:8080/Ticket/findbyId',
+      method: 'POST',
       data: {
-        ticket_id: wx.getStorageSync('ticket_id')
+        order_number: wx.getStorageSync('order_number')
       },
       success: function(res) {
         self.setData({
-          ticket: res.data,
-          go_time: res.data.go_time.toString().substring(0, 5),
-          arrive_time: util.formatTime(new Date(res.data.arrive_time)).split(' ')[1].substring(0, 5),
-          name: wx.getStorageSync('user').name
+          ticket_list: res.data,
+          name: wx.getStorageSync('user').name,
+          order_number: wx.getStorageSync('order_number'),
+          status: wx.getStorageSync('status')
         })
       }
     })
+  },
+  formSubmit1: function(e) {
+        var self = this
+        wx.request({
+          url: 'http://localhost:8080/Order/refund',
+          method: 'POST',
+          data: {
+            order_number:self.data.order_number
+          },
+          success: function(res) {
+            self.setData({
+                status: "refund",
+            })
+            if(res.data){
+              wx.showToast({
+                title: '退款成功',
+                icon: 'success',
+                duration: 2000
+              })
+            }
+            else{
+              wx.showToast({
+                title: '退款失败',
+                icon: 'error',
+                duration: 2000
+              })
+            }
+          }
+        })
+  },
+
+  formSubmit2: function(e) {
+        var self = this
+        wx.request({
+          url: 'http://localhost:8080/Order/completed',
+          method: 'POST',
+          data: {
+            order_number: self.data.order_number
+          },
+          success: function(res) {
+            self.setData({
+              status:"completed"
+            })
+            if(res.data){
+              wx.showToast({
+                title: '添加成功',
+                icon: 'success',
+                duration: 2000
+              })
+            }
+            else{
+              wx.showToast({
+                title: '已经存在该乘客',
+                icon: 'error',
+                duration: 2000
+              })
+            }
+          }
+        })
   },
 
   dishonour: function(e) {

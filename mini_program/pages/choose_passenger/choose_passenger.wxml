@@ -1,5 +1,6 @@
 <view class="page">
   <view class="payment-options">
+    <text>选择支付方式：</text>
   <radio-group bindchange="radioChange">
     <block wx:for="{{paymentOptions}}">
       <radio value="{{item.name}}" checked="{{item.checked}}">{{item.value}}</radio><text>{{item.name}}</text>
