@@ -7,11 +7,12 @@ Page({
    * 页面的初始数据
    */
   data: {
-    passengers: [
+    /*passengers: [
       { name: '张三', id_number: '111111111111111111', phone: '18632495173', identity: false },
       { name: '李四', id_number: '563215321478541206', phone: '18236542973', identity: true },
       // 添加其他乘客信息
-    ],
+    ],*/
+    passengers : []
   },
   gotoAdd_passenger: function(e) {
       wx.navigateTo({

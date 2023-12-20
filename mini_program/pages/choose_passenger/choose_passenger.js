@@ -5,7 +5,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-<<<<<<< HEAD
     // passenger_List: [{
     //   name: "李金霖",
     //   id_number: "110110110110110110",
@@ -20,22 +19,6 @@ Page({
     //   tick:true,
     // }],
     passenger_List: [],
-=======
-    /*passenger_List: [{
-      name: "李金霖",
-      id_number: "110110110110110110",
-      phone: "17773333888",
-      identity: 1,
-      tick:true,
-    },{
-      name: "大春",
-      id_number: "222110110110110110",
-      phone: "16673333888",
-      identity: 0,
-      tick:true,
-    }],*/
-    passenger_List : wx.getStorageSync('passenger'),
->>>>>>> 4a10819153a4a8d665110a1b31bbac620d8aa171
     paymentOptions: [
       { name: 'cash', checked: false },
       { name: 'wechat', checked: false },
@@ -135,13 +118,10 @@ Page({
           account: wx.getStorageSync('user').account,
           date:wx.getStorageSync('go_date'),
           train_number:wx.getStorageSync('train_number'),
-<<<<<<< HEAD
           start_station:self.data.start_station,
           arrive_station:self.data.arrive_station,
           start_time:self.data.start_time,
           arrive_time:self.data.arrive_time,
-=======
->>>>>>> 4a10819153a4a8d665110a1b31bbac620d8aa171
           paymentOptions:self.data.paymentOptions,
           count: self.data.count,
           id_list: self.data.id_list,

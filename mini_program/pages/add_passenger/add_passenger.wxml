@@ -7,7 +7,7 @@
 
   <input class="jg" password="true" placeholder="确认密码" placeholder-style="margin-left: 10px" bindinput="inputPasswordConfirm" value="{{password_confirm}}"/> -->
 
-  <input class="lxdh" value="{{telphone}}" placeholder="手机号码" placeholder-style="margin-left: 10px" bindinput="inputTel" />
+  <input class="lxdh" value="{{phone}}" placeholder="手机号码" placeholder-style="margin-left: 10px" bindinput="inputTel" />
 
 
   <picker range="{{typeList}}" bindchange="bindPickerChange" value="{{index}}" class="lx">

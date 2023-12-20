@@ -34,13 +34,8 @@ Page({
         go_date: wx.getStorageSync('year') + '-' + wx.getStorageSync('month') + '-' + wx.getStorageSync('day'),
       },
       success: function(res) {
-<<<<<<< HEAD
         console.log(res.data)
         if (res.data.length>0) {
-=======
-        // console.log(res.data)
-        for (var i = 0; i < res.data.length; i++) {
->>>>>>> 4a10819153a4a8d665110a1b31bbac620d8aa171
           self.setData({
             hidden_2 : true,
             ticketList: res.data
@@ -62,15 +57,12 @@ Page({
       url: '../choose_passenger/choose_passenger',
     })
     // wx.setStorageSync('ticket_id', e.currentTarget.dataset.ticketId)
-<<<<<<< HEAD
     wx.setStorageSync('go_date', e.currentTarget.dataset.goDate)
     wx.setStorageSync('train_number', e.currentTarget.dataset.trainNumber)
     wx.setStorageSync('go_time', e.currentTarget.dataset.gotime)
     wx.setStorageSync('arrive_time', e.currentTarget.dataset.arrivetime)
     wx.setStorageSync('start_station', e.currentTarget.dataset.startstation)
     wx.setStorageSync('arrive_station', e.currentTarget.dataset.arrivestation)
-=======
->>>>>>> 4a10819153a4a8d665110a1b31bbac620d8aa171
   },
 
   /**
