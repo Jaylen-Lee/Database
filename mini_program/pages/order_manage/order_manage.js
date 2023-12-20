@@ -11,23 +11,23 @@ Page({
     account: "暂无",
     count: 0,
     inputShowed: false,
+    inputVal : '',
     ordersList : [],
     /*ordersList: [{
-      order_number: "000020beb3b359b",
-      purchase_time: "2021-09-01 02:53:03",
-      payment_amount: 7319,
-      payment_method: "alipay",
-      status: "completed",
-      user_account: "805762918578633"
+      "order_number": "000020beb3b359b",
+      "purchase_time": "2021-09-01 02:53:03",
+      "payment_amount": 7319,
+      "payment_method": "alipay",
+      "status": "completed",
+      "user_account": "805762918578633"
     }],*/
-    inputdata: '-',
     hidden: true
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  search: function (options) {
     var self = this;
     self.setData({
       account:wx.getStorageSync('user').account
@@ -35,8 +35,7 @@ Page({
     wx.request({
       url: 'http://localhost:8080/Order/findbyaccount',
       data: {
-        is_ad : wx.getStorageSync('is_ad'),
-        account: wx.getStorageSync('user').account
+        account: self.data.inputVal
       },
       success: function (res) {
 
@@ -62,21 +61,19 @@ Page({
     })
   },
 
-
-  bindSelect: function (e) {
+  /*bindSelect: function (e) {
     wx.navigateTo({
       url: '../ticket/ticket',
     })
     // wx.setStorageSync('ticket_id', e.currentTarget.dataset.ticketId)
     wx.setStorageSync('order_number', e.currentTarget.dataset.orderNumber)
-    wx.setStorageSync('status', e.currentTarget.dataset.status)
-  },
+  },*/
 
   inputCom: function (e) {
     this.setData({
-      inputdata: e.detail.value
+      inputVal: e.detail.value
     })
-    console.log(this.data.inputdata);
+    // console.log(this.data.inputdata);
   },
   hideInput() {
     this.setData({
@@ -107,7 +104,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.onLoad()
   },
 
   /**

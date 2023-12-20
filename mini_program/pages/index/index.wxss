@@ -88,6 +88,12 @@
 .day::after {
   content: " >";
 }
+.custom-image {
+  width: 200rpx;
+  height: 200rpx;
+  margin-top: 10rpx;
+  margin-left: 130rpx;
+}
 
 .train-checked {
   display: flex;
@@ -111,8 +117,36 @@
 
 .btn_query {
   background-color: #29ce5b;
+  margin-top: 50rpx;
   width: 80%;
   padding: 0;
   border-radius: 30px;
   color: white;
+}
+/* 在对应的.wxss文件中添加样式 */
+
+
+.module {
+  width: 120px;
+  height: 30px;
+  border: 2px solid rgb(32, 183, 221);
+  border-radius: 10px;
+  text-align: center;
+  padding: 10px;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.module:hover {
+  background-color: #71ec8c;
+}
+
+image {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 10px;
 }

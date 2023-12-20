@@ -7,6 +7,7 @@ var date = new Date(timestamp);
 console.log(date)
 Page({
   data: {
+    is_ad : false,
     year : date.getFullYear(),
     month: ('0' + (date.getMonth() + 1)).slice(-2),
     day: ('0' + date.getDate()).slice(-2), 
@@ -101,6 +102,9 @@ Page({
   },
 
   onShow: function (e) {
+    if(wx.getStorageSync('is_ad')){
+      this.setData({is_ad:true})
+    }
     var name1 = wx.getStorageSync('startName');
     if (name1) {
       this.setData({

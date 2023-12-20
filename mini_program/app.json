@@ -13,7 +13,10 @@
     "pages/modify_user/modify_user",
     "pages/passenger/passenger",
     "pages/add_passenger/add_passenger",
-    "pages/choose_passenger/choose_passenger"
+    "pages/choose_passenger/choose_passenger",
+    "pages/order_manage/order_manage",
+    "pages/train_manage/train_manage",
+    "pages/user_manage/user_manage"
   ],
   "window": {
     "backgroundTextStyle": "light",

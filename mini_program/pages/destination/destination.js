@@ -7,8 +7,10 @@ Page({
   data: {
     inputShowed: false,
     inputVal: '',
-    stations:['北京','天津','上海'],
-    tempstations : ['北京','天津','上海']
+    station : [],
+    tempstations : [],
+    //stations:['北京','天津','上海'],
+    //tempstations : ['北京','天津','上海']
   },
   onInput: function(e) {
     const keyword = e.detail.value.trim();

@@ -33,6 +33,7 @@ Page({
         var self = this
         wx.request({
           url: 'http://localhost:8080/User/register',
+          method : "POST",
           data: {
             account: self.data.account,
             username: self.data.user_name,

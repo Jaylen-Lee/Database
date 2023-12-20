@@ -153,7 +153,7 @@ Page({
   gotoModify: function(e) {
     if (wx.getStorageSync('flag')) {
       wx.navigateTo({
-        url: '../modify/modify',
+        url: '../modify_user/modify_user',
       })
     } else {
       wx.showModal({

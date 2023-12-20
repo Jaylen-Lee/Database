@@ -5,13 +5,14 @@ Page({
    * 页面的初始数据
    */
   data: {
-    user:{
+      user : {},
+    /*user:{
       account : "123567",
       username : "aad",
       name : "阿萨大大",
       password : "78946",
       phone : "763787268"
-    },
+    },*/
     is_ad : false
   },
 
@@ -23,7 +24,7 @@ Page({
     wx.request({
       url: 'http://localhost:8080/User/findby_account',
       data:{
-        account :wx.getStorageSync('user').id,
+        account :wx.getStorageSync('user').account,
         is_ad : wx.getStorageSync('is_ad')
       },
       success:function(res){

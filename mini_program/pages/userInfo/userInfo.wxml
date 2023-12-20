@@ -9,25 +9,25 @@
   <view class="divLine"></view>
   <view class="row">
     <text class="left-label">账号:</text>
-    <text class="right-label">{{user.account}}</text>
+    <text class="right-text">{{user.account}}</text>
   </view>
   <view class="divLine"></view>
 
   <view class="row">
     <text class="left-label">用户名:</text>
-    <text class="right-label">{{user.username}}</text>
+    <text class="right-text">{{user.username}}</text>
   </view>
   <view class="divLine"></view>
 
   <view class="row" wx:if="{{user.name}}">
     <text class="left-label">姓名:</text>
-    <text class="right-label">{{user.name}}</text>
+    <text class="right-text">{{user.name}}</text>
   </view>
   <view class="divLine"></view>
 
   <view class="row" wx:if="{{user.phone}}">
     <text class="left-label">手机号码:</text>
-    <text class="right-label">{{user.phone}}</text>
+    <text class="right-text">{{user.phone}}</text>
   </view>
   <view class="divLine"></view>
 

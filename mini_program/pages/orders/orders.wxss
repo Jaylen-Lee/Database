@@ -19,11 +19,6 @@
   color: #808080;
 }
 
-.row {
-  display: flex;
-  justify-content: space-between;
-}
-
 .left {
   width: 180rpx;
   text-align: justify;
@@ -65,4 +60,19 @@
   font-size: 18px;
   margin-top: 8px;
   margin-left: 8px;
+}
+.row {
+  display: flex;
+  align-items: center;
+  margin: 10px 10px;
+}
+
+.left-label {
+  width: 180rpx;
+  margin-right: 5px; /* 标签和文本之间的间距，根据需要调整 */
+}
+
+.right-text {
+  width: 450rpx;
+  text-align: left; /* 文本左对齐 */
 }

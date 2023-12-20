@@ -1,31 +1,31 @@
 <view class="page">
-  <view class="content" hidden="{{!hidden}}">
-  <block wx:for="{{trival_List}}">
+  <view class="content" hidden="{{!hidden_2}}">
+  <block wx:for="{{ticketList}}">
     <view class="content" hidden="{{!item.remain}}">
     <view class="item" bindtap="buyTicket" data-go-date="{{item.date}}" data-train-number="{{item.train_number}}" data-remain="{{item.remain}}">
       <view class="row1">
         <view class="num"> {{item.train_number}}</view>
         <view class="go">
-          <view>{{item.depareture_station}}</view>
-          <view>{{item.depareture_time}}</view>
+          <view>{{item.start_station}}</view>
+          <view>{{item.go_time}}</view>
         </view>
         <image src="../../images/direction.png" class="img"></image>
         <view class="arrive">
-          <view>{{item.arrival_station}}</view>
-          <view>{{item.arrival_time}}<text hidden="{{hidden}}" class="addOne">+1</text></view>
+          <view>{{item.arrive_station}}</view>
+          <view>{{item.arrive_time}}<text hidden="{{hidden}}" class="addOne">+1</text></view>
         </view>
       </view>
 
       <view class="row2">
         <!--<view>{{item.seat_type}}</view>-->
-        <view>￥{{item.fare}}</view>
+        <view>￥{{item.price}}</view>
         <view>余量:{{item.remain}}张</view>
       </view>
     </view>
     </view>
   </block>
   </view>
-  <view hidden="{{hidden}}" >
+  <view hidden="{{hidden_2}}" >
     <view class="text">空空如也~换个日期或者车站再查查看吧</view>
     </view>
 </view>

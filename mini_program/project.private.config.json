@@ -5,6 +5,16 @@
       "list": [
         {
           "name": "",
+<<<<<<< HEAD
+=======
+          "pathName": "pages/query/query",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+>>>>>>> bd6b200c433a723f2f8d079c1296d80dbe475d8b
           "pathName": "pages/mycenter/mycenter",
           "query": "",
           "launchMode": "default",
@@ -12,6 +22,16 @@
         },
         {
           "name": "",
+<<<<<<< HEAD
+=======
+          "pathName": "pages/passenger/passenger",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+>>>>>>> bd6b200c433a723f2f8d079c1296d80dbe475d8b
           "pathName": "pages/choose_passenger/choose_passenger",
           "query": "",
           "launchMode": "default",
@@ -33,5 +53,8 @@
         }
       ]
     }
+  },
+  "setting": {
+    "urlCheck": false
   }
 }

@@ -6,9 +6,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-    user: { username : 'test',
+    /*user: { username : 'test',
     name: 'test',
-    phone: 'test',},
+    phone: 'test',},*/
+    user : {},
     is_ad : false,
     username : '',
     name: '',
@@ -29,9 +30,11 @@ Page({
     wx.request({
       url: 'http://localhost:8080/User/findby_account',
       data: {
-        id: wx.getStorageSync('user').id
+        is_ad : wx.getStorageSync('is_ad'),
+        account: wx.getStorageSync('user').account
       },
       success: function(res) {
+        console.log(res.data)
         self.setData({
           user: res.data,
           is_ad : wx.getStorageSync('is_ad')
@@ -80,7 +83,7 @@ Page({
   
     // 构建要发送到服务器的数据对象
     var userData = {
-      id: wx.getStorageSync('user').id,
+      id: wx.getStorageSync('user').account,
       username: (self.data.flag1 ? self.data.username.trim() : wx.getStorageSync('user').username),
       password: (self.data.password ? self.data.password : wx.getStorageSync('user').password)
     };
@@ -96,6 +99,10 @@ Page({
     wx.request({
       url: 'http://localhost:8080/User/modify',
       data: userData,
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded' // Set the content type to form data
+      },
       success: function(res) {
         wx.showToast({
           title: '修改成功',
