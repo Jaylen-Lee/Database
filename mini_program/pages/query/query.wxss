@@ -3,7 +3,7 @@
 }
 
 .item {
-  margin: 100rpx 20rpx;
+  margin: 50rpx 20rpx;
   position: relative;
   justify-content: space-around;
   align-items: center;

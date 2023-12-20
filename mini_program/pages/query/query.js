@@ -7,15 +7,17 @@ Page({
    * 页面的初始数据
    */
   data: {
-    trival_List: [{depareture_station : '上海',
+    /*trival_List: [{depareture_station : '上海',
     arrival_station : '北京西',
     depareture_time: 'hh:mm',
     arrival_time : 'hh:mm',
     train_number: 'E568',
     fare : '333',
     date: 'yyyy-mm-dd',
-    remain: '1199'}],
-    hidden: true
+    remain: '1199'}],*/
+    ticketList : [],
+    hidden: true,
+    hidden_2 : false
   },
 
   /**
@@ -32,15 +34,18 @@ Page({
         // type: (wx.getStorageSync('stu_ticket') ? '学生票' : '成人票')
       },
       success: function(res) {
-
+        console.log(res.data)
         for (var i = 0; i < res.data.length; i++) {
+          self.setData({
+            hidden_2 : true
+          })
           var start = "ticketList[" + i + "].start_station"
           var end = "ticketList[" + i + "].arrive_station"
           var go_time = "ticketList[" + i + "].go_time"
           var arrive_time = "ticketList[" + i + "].arrive_time"
           var train_number = "ticketList[" + i + "].train_number"
           // var seat_type = "ticketList[" + i + "].seat_type"
-          var type = "ticketList[" + i + "].type"
+          // var type = "ticketList[" + i + "].type"
           var price = "ticketList[" + i + "].price"
           // var ticket_id = "ticketList[" + i + "].ticket_id"
           var ticket_goDate = "ticketList[" + i + "].go_date"
@@ -48,21 +53,21 @@ Page({
 
           self.setData({
             [go_time]: res.data[i].go_time.toString().substring(0, 5),
-            [arrive_time]: util.formatTime(new Date(res.data[i].arrive_time)).split(' ')[1].substring(0, 5),
+            [arrive_time]: res.data[i].arrive_time.toString().substring(0, 5),
             [start]: res.data[i].start_station,
             [end]: res.data[i].arrive_station,
             [train_number]: res.data[i].train_number,
             [price]: res.data[i].price,
             // [seat_type]: res.data[i].seat_type,
-            [type]: res.data[i].type,
+            // [type]: res.data[i].type,
             // [ticket_id]: res.data[i].ticket_id,
             [ticket_goDate]: res.data[i].go_date.toString(),
             [remain]: res.data[i].remain
 
           })
-          
+          console.log(self.data.ticketList)
           // 跨天时，标识"+1"
-          if (res.data[i].go_date.toString().replace(/-/g, '') < util.formatTime(new Date(res.data[i].arrive_time)).split(' ')[0].replace(/\//g, '')) {
+          if (res.data[i].go_time.toString() > res.data[i].arrive_time.toString()) {
             self.setData({
               hidden: false
             })

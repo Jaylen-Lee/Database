@@ -5,6 +5,13 @@
       "list": [
         {
           "name": "",
+          "pathName": "pages/query/query",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
           "pathName": "pages/mycenter/mycenter",
           "query": "",
           "launchMode": "default",
