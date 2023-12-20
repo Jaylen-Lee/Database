@@ -43,11 +43,11 @@ Page({
       },
       success: function(res) {
         console.log(res.data)
-        for (var i = 0; i < res.data.length; i++) {
         if (res.data.length>0) {
+        for (var i = 0; i < res.data.length; i++) {
           self.setData({
             hidden_2 : true,
-            ticketList: res.data
+            // ticketList: res.data
           })
           var start = "ticketList[" + i + "].start_station"
           var end = "ticketList[" + i + "].arrive_station"
@@ -60,7 +60,38 @@ Page({
           // var ticket_id = "ticketList[" + i + "].ticket_id"
           var ticket_goDate = "ticketList[" + i + "].go_date"
           var remain = "ticketList[" + i + "].remain"
-
+          var hidden =  "ticketList[" + i + "].hidden"
+          if (res.data[i].go_time.toString() > res.data[i].arrive_time.toString()) {
+            self.setData({
+              [go_time]: res.data[i].go_time.toString().substring(0, 5),
+              [arrive_time]: res.data[i].arrive_time.toString().substring(0, 5),
+              [start]: res.data[i].start_station,
+              [end]: res.data[i].arrive_station,
+              [train_number]: res.data[i].train_number,
+              [price]: res.data[i].price,
+              // [seat_type]: res.data[i].seat_type,
+              // [type]: res.data[i].type,
+              // [ticket_id]: res.data[i].ticket_id,
+              [ticket_goDate]: res.data[i].go_date.toString(),
+              [remain]: res.data[i].remain,
+              [hidden] : false
+            }) 
+          } else {
+            self.setData({
+              [go_time]: res.data[i].go_time.toString().substring(0, 5),
+              [arrive_time]: res.data[i].arrive_time.toString().substring(0, 5),
+              [start]: res.data[i].start_station,
+              [end]: res.data[i].arrive_station,
+              [train_number]: res.data[i].train_number,
+              [price]: res.data[i].price,
+              // [seat_type]: res.data[i].seat_type,
+              // [type]: res.data[i].type,
+              // [ticket_id]: res.data[i].ticket_id,
+              [ticket_goDate]: res.data[i].go_date.toString(),
+              [remain]: res.data[i].remain,
+              [hidden] : true
+            })
+          }
           self.setData({
             [go_time]: res.data[i].go_time.toString().substring(0, 5),
             [arrive_time]: res.data[i].arrive_time.toString().substring(0, 5),
@@ -73,19 +104,9 @@ Page({
             // [ticket_id]: res.data[i].ticket_id,
             [ticket_goDate]: res.data[i].go_date.toString(),
             [remain]: res.data[i].remain,
-            hidden_2 : true,
-            ticketList: res.data
+            
           })
           console.log(self.data.ticketList)
-          if (res.data[i].go_time.toString() > res.data[i].arrive_time.toString()) {
-            self.setData({
-              hidden: false
-            })
-          } else {
-            self.setData({
-              hidden: true
-            })
-          }
         }
         }
       }

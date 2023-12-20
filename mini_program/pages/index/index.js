@@ -8,9 +8,12 @@ console.log(date)
 Page({
   data: {
     is_ad : false,
-    year : date.getFullYear(),
+    /*year : date.getFullYear(),
     month: ('0' + (date.getMonth() + 1)).slice(-2),
-    day: ('0' + date.getDate()).slice(-2), 
+    day: ('0' + date.getDate()).slice(-2), */
+    year : '0000',
+    month : '00',
+    day : '00',
     current_date: "2023-06-17",
     end_date: "2023-07-02",
     startName: '出发站',
@@ -91,8 +94,8 @@ Page({
     var d = wx.getStorageSync("day")
     if (m && d) {
       this.setData({
-        month: ('0' + (date.getMonth() + 1)).slice(-2),
-        day: ('0' + date.getDate()).slice(-2)
+        month: '00',
+        day: '00'
       })
       wx.setStorageSync('month', this.data.month)
       wx.setStorageSync('day', this.data.day)

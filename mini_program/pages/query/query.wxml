@@ -12,7 +12,7 @@
         <image src="../../images/direction.png" class="img"></image>
         <view class="arrive">
           <view>{{item.arrive_station}}</view>
-          <view>{{item.arrive_time}}<text hidden="{{hidden}}" class="addOne">+1</text></view>
+          <view>{{item.arrive_time}}<text hidden="{{item.hidden}}" class="addOne">+1</text></view>
         </view>
       </view>
 
