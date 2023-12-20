@@ -5,6 +5,13 @@
       "list": [
         {
           "name": "",
+          "pathName": "pages/mycenter/mycenter",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
           "pathName": "pages/choose_passenger/choose_passenger",
           "query": "",
           "launchMode": "default",
