@@ -1,59 +1,5 @@
 {
   "description": "项目私有配置文件。此文件中的内容将覆盖 project.config.json 中的相同字段。项目的改动优先同步到此文件中。详见文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html",
-  "condition": {
-    "miniprogram": {
-      "list": [
-        {
-          "name": "",
-<<<<<<< HEAD
-=======
-          "pathName": "pages/query/query",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "",
->>>>>>> bd6b200c433a723f2f8d079c1296d80dbe475d8b
-          "pathName": "pages/mycenter/mycenter",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "",
-<<<<<<< HEAD
-=======
-          "pathName": "pages/passenger/passenger",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "",
->>>>>>> bd6b200c433a723f2f8d079c1296d80dbe475d8b
-          "pathName": "pages/choose_passenger/choose_passenger",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "",
-          "pathName": "pages/ticket/ticket",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "",
-          "pathName": "pages/orders/orders",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        }
-      ]
-    }
-  },
   "setting": {
     "urlCheck": false
   }

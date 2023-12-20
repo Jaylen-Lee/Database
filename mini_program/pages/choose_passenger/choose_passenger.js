@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    passenger_List: [{
+    /*passenger_List: [{
       name: "李金霖",
       id_number: "110110110110110110",
       phone: "17773333888",
@@ -17,7 +17,8 @@ Page({
       phone: "16673333888",
       identity: 0,
       tick:true,
-    }],
+    }],*/
+    passenger_List : wx.getStorageSync('passenger'),
     paymentOptions: [
       { name: 'cash', checked: false },
       { name: 'wechat', checked: false },
@@ -73,7 +74,8 @@ Page({
   },
 
   formSubmit: function (e) {
-    if (!this.data.count) {
+    console.log(this.data.count)
+    if (this.data.count) {
       var self = this
       wx.request({
         url: 'http://localhost:8080/Ticket/choose',
@@ -81,8 +83,8 @@ Page({
         data: {
           // 发送所有选中乘客id和身份数据
           account: wx.getStorageSync('user').account,
-          date:wx.getStorageSync('go_date').account,
-          train_number:wx.getStorageSync('train_number').account,
+          date:wx.getStorageSync('go_date'),
+          train_number:wx.getStorageSync('train_number'),
           paymentOptions:self.data.paymentOptions,
           count: self.data.count,
           id_list: self.data.id_list,

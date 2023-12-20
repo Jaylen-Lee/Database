@@ -2,7 +2,7 @@
   <view class="content" hidden="{{!hidden_2}}">
   <block wx:for="{{ticketList}}">
     <view class="content" hidden="{{!item.remain}}">
-    <view class="item" bindtap="buyTicket" data-go-date="{{item.date}}" data-train-number="{{item.train_number}}" data-remain="{{item.remain}}">
+    <view class="item" bindtap="buyTicket" data-go_date="{{item.go_date}}" data-train_number="{{item.train_number}}" data-remain="{{item.remain}}">
       <view class="row1">
         <view class="num"> {{item.train_number}}</view>
         <view class="go">

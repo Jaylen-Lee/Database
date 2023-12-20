@@ -34,7 +34,7 @@ Page({
         // type: (wx.getStorageSync('stu_ticket') ? '学生票' : '成人票')
       },
       success: function(res) {
-        console.log(res.data)
+        // console.log(res.data)
         for (var i = 0; i < res.data.length; i++) {
           self.setData({
             hidden_2 : true
@@ -84,12 +84,12 @@ Page({
   },
 
   buyTicket: function(e) {
+    wx.setStorageSync('go_date', e.currentTarget.dataset.go_date)
+    wx.setStorageSync('train_number', e.currentTarget.dataset.train_number)
     wx.navigateTo({
       url: '../choose_passenger/choose_passenger',
     })
     // wx.setStorageSync('ticket_id', e.currentTarget.dataset.ticketId)
-    wx.setStorageSync('go_date', e.currentTarget.dataset.goDate)
-    wx.setStorageSync('train_number', e.currentTarget.dataset.trainNumber)
   },
 
   /**
