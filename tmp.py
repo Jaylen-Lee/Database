@@ -535,6 +535,7 @@ def complete_payment():
             with connection.cursor() as cursor:
                 # Update order status to 'completed'
                 cursor.execute("UPDATE unpaid_order SET status = 'completed' WHERE order_number = %s", (order_number,))
+                cursor.execute("UPDATE `order` SET status = 'completed' WHERE order_number = %s", (order_number,))
 
                 # Commit the changes to the database
                 connection.commit()
@@ -564,7 +565,7 @@ def refund_order():
         try:
             with connection.cursor() as cursor:
                 # Update order status to 'refund'
-                cursor.execute("UPDATE unpaid_order SET status = 'refund' WHERE order_number = %s", (order_number,))
+                cursor.execute("UPDATE `order` SET status = 'refund' WHERE order_number = %s", (order_number,))
 
                 # Commit the changes to the database
                 connection.commit()
