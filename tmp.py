@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 import pymysql
 from pymysql.cursors import DictCursor
+from hashlib import md5
 
 app = Flask(__name__)
 
@@ -434,6 +435,15 @@ def delete_passenger_info():
     except Exception as e:
         return jsonify({'error': str(e)})
 
+def generate_order_number(account,pay_amount,date):
+    return md5(f'{account}'.encode(encoding='utf-8')).hexdigest()[:5]+md5(f'{pay_amount}'.encode(encoding='utf-8')).hexdigest()[:5]+\
+           md5(f'{date}'.encode(encoding='utf-8')).hexdigest()[:5]
+
+def generate_ticket_number(train_number,id_number,order_number,date):
+    return md5(f'{train_number}'.encode(encoding='utf-8')).hexdigest()[:5] + md5(
+        f'{id_number}'.encode(encoding='utf-8')).hexdigest()[:5] + md5(
+        f'{order_number}'.encode(encoding='utf-8')).hexdigest()[:5] + md5(
+        f'{date}'.encode(encoding='utf-8')).hexdigest()[:5]
 
 # Route for purchasing tickets based on selected train
 @app.route('/Ticket/choose', methods=['POST'])
@@ -466,16 +476,16 @@ def purchase_tickets():
                     # Calculate ticket price based on identity
                     # For simplicity, assuming the price is fixed
                     price = 100  # You can adjust this based on your pricing logic
-
+                    order_price = price*len(identity_list) - 0.25*(sum[identity_list])
                     # Insert into unpaid orders table
-                    order_number = generate_order_number()
+                    order_number = generate_order_number(account,order_price,date)
                     cursor.execute(
                         "INSERT INTO unpaid_order (order_number, account, date, train_number, count, payment_method, status) VALUES (%s, %s, %s, %s, %s, %s, %s)",
                         (order_number, account, date, train_number, count, pay_method, 'unpaid'))
 
                     # Insert into ticket table
                     for i in range(count):
-                        ticket_number = generate_ticket_number()
+                        ticket_number = generate_ticket_number(train_number,id_list[i],order_number,date)
                         cursor.execute(
                             "INSERT INTO ticket (ticket_number, train_number, date, id_number, order_number, fare) VALUES (%s, %s, %s, %s, %s, %s)",
                             (ticket_number, train_number, date, id_list[i], order_number,
