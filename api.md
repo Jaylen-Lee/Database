@@ -187,6 +187,14 @@
 
   - `train_number`(所选车次)
 
+  -  `start_station`(以下四个为车次出发到达信息)
+
+  - `arrive_station`
+
+  - `start_time`
+
+  - `arrive_time`
+
   - `paymentOptions`   固定格式，只会有一个checked为True即付款方式，paymentOptions: [
 
        { name: 'cash', checked: false },

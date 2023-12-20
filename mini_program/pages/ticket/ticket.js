@@ -85,7 +85,7 @@ Page({
             })
             if(res.data){
               wx.showToast({
-                title: '添加成功',
+                title: '支付成功',
                 icon: 'success',
                 duration: 2000
               })

@@ -2,7 +2,11 @@
   <view class="content" hidden="{{!hidden_2}}">
   <block wx:for="{{ticketList}}">
     <view class="content" hidden="{{!item.remain}}">
+<<<<<<< HEAD
     <view class="item" bindtap="buyTicket" data-arrivetime="{{item.arrive_time}}" data-gotime="{{item.go_time}}" data-startstation="{{item.start_station}}" data-arrivestation="{{item.arrive_station}}" data-go-date="{{item.go_date}}" data-train-number="{{item.train_number}}" data-remain="{{item.remain}}">
+=======
+    <view class="item" bindtap="buyTicket" data-go_date="{{item.go_date}}" data-train_number="{{item.train_number}}" data-remain="{{item.remain}}" data-go_time="{{item.go_time}}" data-arrive_time="{{item.arrive_time}}">
+>>>>>>> 4a10819153a4a8d665110a1b31bbac620d8aa171
       <view class="row1">
         <view class="num"> {{item.train_number}}</view>
         <view class="go">

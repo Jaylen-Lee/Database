@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 import pymysql
 from pymysql.cursors import DictCursor
+import arrow
 from hashlib import md5
 
 app = Flask(__name__)
@@ -257,8 +258,9 @@ def query_train_info():
                     train_type = train_type_dict.get(train['train_number'], 'Unknown')
                     # Calculate running time in minutes
                     # pdb.set_trace()
-                    running_time_minutes = (arrow.get(train['arrive_time'], 'HH:mm:ss') - arrow.get(train['go_time'], 'HH:mm:ss')
-                                           ).seconds // 60
+                    running_time_minutes = (arrow.get(train['arrive_time'], 'HH:mm:ss') - arrow.get(train['go_time'],
+                                                                                                    'HH:mm:ss')
+                                            ).seconds // 60
 
                     # Determine base price based on running time
                     base_price = calculate_base_price(running_time_minutes)
@@ -283,9 +285,11 @@ def query_train_info():
     except Exception as e:
         return jsonify({'error': str(e)})
 
+
 def calculate_base_price(running_time_minutes):
     # based on the running time. This is just a placeholder
     return max(50, running_time_minutes * 0.1)  # Adjust as needed
+
 
 def get_remaining_seats(connection, train_number, go_date):
     with connection.cursor() as cursor:
@@ -298,12 +302,14 @@ def get_remaining_seats(connection, train_number, go_date):
         result = cursor.fetchone()
         return result['remaining_seats'] if result else 0
 
+
 def format_time(raw_time):
     # Assuming raw_time is a timedelta object
     hours, remainder = divmod(raw_time.seconds, 3600)
     minutes, seconds = divmod(remainder, 60)
     formatted_time = "{:02}:{:02}:{:02}".format(hours, minutes, seconds)
     return formatted_time
+
 
 # Route for modifying user/administrator information
 @app.route('/User/modify', methods=['POST'])
@@ -435,15 +441,19 @@ def delete_passenger_info():
     except Exception as e:
         return jsonify({'error': str(e)})
 
-def generate_order_number(account,pay_amount,date):
-    return md5(f'{account}'.encode(encoding='utf-8')).hexdigest()[:5]+md5(f'{pay_amount}'.encode(encoding='utf-8')).hexdigest()[:5]+\
+
+def generate_order_number(account, pay_amount, date):
+    return md5(f'{account}'.encode(encoding='utf-8')).hexdigest()[:5] + md5(
+        f'{pay_amount}'.encode(encoding='utf-8')).hexdigest()[:5] + \
            md5(f'{date}'.encode(encoding='utf-8')).hexdigest()[:5]
 
-def generate_ticket_number(train_number,id_number,order_number,date):
+
+def generate_ticket_number(train_number, id_number, order_number, date):
     return md5(f'{train_number}'.encode(encoding='utf-8')).hexdigest()[:5] + md5(
         f'{id_number}'.encode(encoding='utf-8')).hexdigest()[:5] + md5(
         f'{order_number}'.encode(encoding='utf-8')).hexdigest()[:5] + md5(
         f'{date}'.encode(encoding='utf-8')).hexdigest()[:5]
+
 
 # Route for purchasing tickets based on selected train
 @app.route('/Ticket/choose', methods=['POST'])
@@ -459,7 +469,10 @@ def purchase_tickets():
         payment_options = data.get('paymentOptions')
         count = data.get('count')
         id_list = data.get('id_list')
-        pay_method = data.get('pay_method')
+        for dic in payment_options:
+            if dic['checked']:
+                pay_method = dic['name']
+                break
         identity_list = data.get('identity_list')
 
         # Connect to MySQL database
@@ -470,22 +483,22 @@ def purchase_tickets():
                 # Check if there are enough remaining seats
                 cursor.execute("SELECT remaining_seats FROM seats WHERE train_number = %s AND date = %s",
                                (train_number, date))
-                remaining_seats = cursor.fetchone()[0]
-
+                remaining_seats = cursor.fetchall()
+                remaining_seats = remaining_seats[0]['remaining_seats']
                 if remaining_seats >= count:
                     # Calculate ticket price based on identity
                     # For simplicity, assuming the price is fixed
                     price = 100  # You can adjust this based on your pricing logic
-                    order_price = price*len(identity_list) - 0.25*(sum[identity_list])
+                    order_price = price * len(identity_list) - 0.25 * (sum(identity_list))
                     # Insert into unpaid orders table
-                    order_number = generate_order_number(account,order_price,date)
+                    order_number = generate_order_number(account, order_price, date)
                     cursor.execute(
-                        "INSERT INTO unpaid_order (order_number, account, date, train_number, count, payment_method, status) VALUES (%s, %s, %s, %s, %s, %s, %s)",
-                        (order_number, account, date, train_number, count, pay_method, 'unpaid'))
+                        "INSERT INTO `order` (order_number, user_account, purchase_time, payment_amount, payment_method, status) VALUES (%s, %s, %s, %s, %s, %s)",
+                        (order_number, account, date, order_price, pay_method, 'unpaid'))
 
                     # Insert into ticket table
                     for i in range(count):
-                        ticket_number = generate_ticket_number(train_number,id_list[i],order_number,date)
+                        ticket_number = generate_ticket_number(train_number, id_list[i], order_number, date)
                         cursor.execute(
                             "INSERT INTO ticket (ticket_number, train_number, date, id_number, order_number, fare) VALUES (%s, %s, %s, %s, %s, %s)",
                             (ticket_number, train_number, date, id_list[i], order_number,
@@ -521,7 +534,7 @@ def complete_payment():
         try:
             with connection.cursor() as cursor:
                 # Update order status to 'completed'
-                cursor.execute("UPDATE unpaid_order SET status = 'completed' WHERE order_number = %s", (order_number,))
+                cursor.execute("UPDATE `order` SET status = 'completed' WHERE order_number = %s", (order_number,))
 
                 # Commit the changes to the database
                 connection.commit()
@@ -551,7 +564,7 @@ def refund_order():
         try:
             with connection.cursor() as cursor:
                 # Update order status to 'refund'
-                cursor.execute("UPDATE unpaid_order SET status = 'refund' WHERE order_number = %s", (order_number,))
+                cursor.execute("UPDATE `order` SET status = 'refund' WHERE order_number = %s", (order_number,))
 
                 # Commit the changes to the database
                 connection.commit()
@@ -590,7 +603,8 @@ def find_tickets_by_order():
                      'date': str(ticket['date']), 'id_number': ticket['id_number'],
                      'order_number': ticket['order_number'], 'fare': ticket['fare'],
                      'arrival_time': str(ticket['arrival_time']), 'departure_time': str(ticket['departure_time']),
-                     'departure_station': ticket['departure_station'], 'destination_station': ticket['destination_station']} for
+                     'departure_station': ticket['departure_station'],
+                     'destination_station': ticket['destination_station']} for
                     ticket in tickets]
 
                 return jsonify(result)
@@ -600,6 +614,7 @@ def find_tickets_by_order():
             connection.close()
     except Exception as e:
         return jsonify({'error': str(e)})
+
 
 # Route for finding all orders for a specific user
 @app.route('/Order/findbyaccount', methods=['GET'])
@@ -618,8 +633,10 @@ def find_orders_by_account():
                 orders = cursor.fetchall()
 
                 # Convert the result to a list of dictionaries
-                result = [{'order_number': order['order_number'], 'purchase_time': str(order['purchase_time']), 'payment_amount': order['payment_amount'],
-                           'payment_method': order['payment_method'], 'status': order['status'], 'user_account': order['user_account']} for order in
+                result = [{'order_number': order['order_number'], 'purchase_time': str(order['purchase_time']),
+                           'payment_amount': order['payment_amount'],
+                           'payment_method': order['payment_method'], 'status': order['status'],
+                           'user_account': order['user_account']} for order in
                           orders]
 
                 return jsonify(result)
@@ -685,7 +702,8 @@ def find_users_by_account():
                 users = cursor.fetchall()
 
                 # Convert the result to a list of dictionaries
-                result = [{'account': user['account'], 'username': user['username'], 'password': user['password'], 'noOfOrder': user['noOfOrder']} for
+                result = [{'account': user['account'], 'username': user['username'], 'password': user['password'],
+                           'noOfOrder': user['noOfOrder']} for
                           user in users]
 
                 return jsonify(result)
