@@ -88,6 +88,7 @@ Page({
     wx.request({
       url: 'http://localhost:8080/Passenger/delete',
       data: data,
+      method: 'POST',
       success: function(res) {
         wx.showToast({
           title: '删除成功',

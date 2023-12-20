@@ -45,5 +45,6 @@
     "ignore": [],
     "include": []
   },
-  "projectname": "mini_program"
+  "projectname": "mini_program",
+  "appid": "touristappid"
 }

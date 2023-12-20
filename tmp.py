@@ -9,9 +9,10 @@ app = Flask(__name__)
 # Your database connection information
 db_config = {
     'host': 'localhost',
-    'user': 'sola',  # Replace with your username
-    'password': 'kaimo1234',  # Replace with your password
-    'database': 'train_system',  # Replace with your database name
+    'port':3306,
+    'user': 'root',  # Replace with your username
+    'password': '123456',  # Replace with your password
+    'database': 'dazuoye',  # Replace with your database name
     'charset': 'utf8mb4',
     'cursorclass': DictCursor
 }
@@ -461,11 +462,14 @@ def purchase_tickets():
     try:
         # Get JSON data from the request
         data = request.json
-
         # Extract parameters from JSON data
         account = data.get('account')
         date = data.get('date')
         train_number = data.get('train_number')
+        start_station = data.get("start_station")
+        arrive_station = data.get("arrive_station")
+        start_time = data.get("start_time")
+        arrive_time = data.get("arrive_time")
         payment_options = data.get('paymentOptions')
         count = data.get('count')
         id_list = data.get('id_list')
@@ -495,18 +499,16 @@ def purchase_tickets():
                     cursor.execute(
                         "INSERT INTO `order` (order_number, user_account, purchase_time, payment_amount, payment_method, status) VALUES (%s, %s, %s, %s, %s, %s)",
                         (order_number, account, date, order_price, pay_method, 'unpaid'))
-
                     # Insert into ticket table
                     for i in range(count):
                         ticket_number = generate_ticket_number(train_number, id_list[i], order_number, date)
                         cursor.execute(
-                            "INSERT INTO ticket (ticket_number, train_number, date, id_number, order_number, fare) VALUES (%s, %s, %s, %s, %s, %s)",
-                            (ticket_number, train_number, date, id_list[i], order_number,
+                            "INSERT INTO ticket (ticket_number, train_number,departure_station,destination_station,departure_time,arrival_time, date, id_number, order_number, fare) VALUES (%s, %s,%s,%s,%s,%s, %s, %s, %s, %s)",
+                            (ticket_number, train_number, start_station,arrive_station,start_time,arrive_time,date, id_list[i], order_number,
                              price * (0.75 if identity_list[i] == 1 else 1)))
 
                     # Commit the changes to the database
                     connection.commit()
-
                     return jsonify({'success': True, 'order_number': order_number})
                 else:
                     return jsonify({'success': False, 'message': 'Not enough remaining seats'})
