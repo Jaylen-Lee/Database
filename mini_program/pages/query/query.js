@@ -84,6 +84,8 @@ Page({
   },
 
   buyTicket: function(e) {
+    wx.setStorageSync('go_time', e.currentTarget.dataset.go_time)
+    wx.setStorageSync('arrive_time', e.currentTarget.dataset.arrive_time)
     wx.setStorageSync('go_date', e.currentTarget.dataset.go_date)
     wx.setStorageSync('train_number', e.currentTarget.dataset.train_number)
     wx.navigateTo({
