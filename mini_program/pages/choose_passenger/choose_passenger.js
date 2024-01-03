@@ -133,7 +133,12 @@ Page({
               title: '订单生成成功，请尽快支付',
               icon: 'success',
               duration: 2000
-            })
+            });
+            setTimeout(function() {
+              wx.navigateTo({
+                url: '../orders/orders'
+              });
+            }, 2000);
           } else {
             wx.showToast({
               title: '订单生成失败',
